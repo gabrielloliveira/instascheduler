@@ -57,13 +57,15 @@ def menuSecondary(db,accountLogin):
             account.user = accountLogin
             '''----------------------------------------------------'''
             scheduler.account = account
-            print("ei")
             scheduler.created = datetime.today()
             scheduler.date_scheduler = input("Data para ser publicado a foto(dd/mm/YY HH:MM): ")
             db.publication = scheduler
 
         if op == 2:
-            #mandar o email
+            data = db.publication[0].date_scheduler
+            exe = "python3 mandaremail.py Sua publicacao será feita as "+str(data) +"&"
+            os.system(exe)
+            #print("Sua publicacao será feita")
             return False
 
 
