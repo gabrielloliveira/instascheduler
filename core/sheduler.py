@@ -46,8 +46,8 @@ class Scheduler:
         return self._created
    
     @created.setter
-    def created(self):
-        self._created = datetime.today()
+    def created(self, data):
+        self._created = data
     
     
     @property

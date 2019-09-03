@@ -1,4 +1,4 @@
-class User:
+class Instagram:
 	def __init__(self):
 		self._username = None
 		self._password = None
