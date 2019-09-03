@@ -4,7 +4,7 @@ class User:
 		self._password = None
 		self._user = None
 
-	"-----------------------------get-and-set-------------------"
+	"""-----------------------------get-and-set-------------------"""
 	@property
 	def username(self):
 		return self._username
@@ -29,6 +29,6 @@ class User:
 	def user(self, valor):
 		self._user = valor
 
-	"-----------------------------method---------------------"
+	"""----------------------------other-method---------------------"""
 	def get_last_posts(self):
 		pass
