@@ -1,5 +1,16 @@
 class User:
     ID = 0
+
+    accounts = list()
+    def __new__(cls, email):
+        if not email in User.accounts:
+            User.__instance = object.__new__(cls)
+            email = email.lower()
+            User.accounts.append(email)
+            User.__instance._email = email
+        else:
+            raise Exception('Já existe esse usuário na plataforma')  
+
     def __init__(self):
         self._email = None
         self._password = None
