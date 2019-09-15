@@ -6,7 +6,7 @@ smtp_ssl_host = 'smtp.gmail.com'
 smtp_ssl_port = 465
 # username ou email para logar no servidor
 username = 'notificacaodaaplicacao@gmail.com'
-password = 'InstaScheduler'
+password = '*******'
 
 from_addr = 'notificacaodaaplicacao@gmail.com'
 to_addrs = ['notificacaodaaplicacao@gmail.com']
