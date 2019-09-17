@@ -144,7 +144,7 @@ border-radius: 16px;</string>
 border: 1px solid #f7f7f7;</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="link_signin">
     <property name="geometry">
      <rect>
       <x>310</x>
@@ -176,7 +176,7 @@ text-decoration: underline;</string>
    <zorder>password_field</zorder>
    <zorder>label_3</zorder>
    <zorder>login_button</zorder>
-   <zorder>label_4</zorder>
+   <zorder>link_signin</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
