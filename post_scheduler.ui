@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QColumnView" name="columnView">
+    <property name="geometry">
+     <rect>
+      <x>-5</x>
+      <y>-19</y>
+      <width>811</width>
+      <height>481</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #fcfcfc;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>50</y>
+      <width>271</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 24px;
+color: #404244;
+</string>
+    </property>
+    <property name="text">
+     <string>Agendar Publicação</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>101</x>
+      <y>151</y>
+      <width>76</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 18px;
+color: #404244;</string>
+    </property>
+    <property name="text">
+     <string>Legenda:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="scheduler_button">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>400</y>
+      <width>301</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #3897f0;
+color: white;
+border-color: #3897f0;
+border-radius: 16px;</string>
+    </property>
+    <property name="text">
+     <string>Agendar</string>
+    </property>
+   </widget>
+   <widget class="QColumnView" name="columnView_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>20</y>
+      <width>741</width>
+      <height>421</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+border: 1px solid #f7f7f7;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_home">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>50</y>
+      <width>110</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #3897f0;
+color: white;
+border-color: #3897f0;
+border-radius: 16px;</string>
+    </property>
+    <property name="text">
+     <string>Voltar</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>140</y>
+      <width>278</width>
+      <height>58</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="styleSheet">
+        <string notr="true">font-size: 18px;
+color: #404244;</string>
+       </property>
+       <property name="text">
+        <string>Foto:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: #5c4aca;
+color: white;
+border-color: #5c4aca;
+border-radius: 16px;
+padding: 10px;
+width: 200px;</string>
+       </property>
+       <property name="text">
+        <string>Upload</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>101</x>
+      <y>101</y>
+      <width>42</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 18px;
+color: #404244;</string>
+    </property>
+    <property name="text">
+     <string>Foto:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_upload">
+    <property name="geometry">
+     <rect>
+      <x>224</x>
+      <y>101</y>
+      <width>421</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:#8334ac ;
+color: white;
+border-color: #8334ac;
+border-radius: 16px;
+padding: 10px;</string>
+    </property>
+    <property name="text">
+     <string>Upload</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="subtitle_field">
+    <property name="geometry">
+     <rect>
+      <x>224</x>
+      <y>151</y>
+      <width>421</width>
+      <height>140</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="location_checkBox">
+    <property name="geometry">
+     <rect>
+      <x>222</x>
+      <y>298</y>
+      <width>179</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Compartilhar Lozalização</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>101</x>
+      <y>324</y>
+      <width>86</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 18px;
+color: #404244;</string>
+    </property>
+    <property name="text">
+     <string>Instagram:</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="instagram_field">
+    <property name="geometry">
+     <rect>
+      <x>224</x>
+      <y>324</y>
+      <width>421</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>@</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>101</x>
+      <y>356</y>
+      <width>109</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 18px;
+color: #404244;</string>
+    </property>
+    <property name="text">
+     <string>Data do post:</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QDateTimeEdit" name="date_scheduler_field">
+    <property name="geometry">
+     <rect>
+      <x>224</x>
+      <y>356</y>
+      <width>421</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>layoutWidget</zorder>
+   <zorder>columnView</zorder>
+   <zorder>columnView_2</zorder>
+   <zorder>label</zorder>
+   <zorder>label_3</zorder>
+   <zorder>scheduler_button</zorder>
+   <zorder>button_home</zorder>
+   <zorder>label_4</zorder>
+   <zorder>button_upload</zorder>
+   <zorder>subtitle_field</zorder>
+   <zorder>location_checkBox</zorder>
+   <zorder>label_5</zorder>
+   <zorder>instagram_field</zorder>
+   <zorder>label_6</zorder>
+   <zorder>date_scheduler_field</zorder>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
