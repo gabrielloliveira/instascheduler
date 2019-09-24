@@ -1,10 +1,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QApplication, QTableWidgetItem
-from telas.tela_inicial import Ui_Tela_Inicio
-from telas.tela_cadastro import Ui_Tela_Cadastro
-from telas.tela_cadastro_livro import Ui_Tela_Cadastro_Livro
-from telas.tela_principal import Ui_Tela_Principal
-from telas.tela_acervo import Ui_Tela_Acervo
+from screens.login import Ui_Login
+from screens.signup import Ui_Signup
+from screens.home import Ui_Home
+from screens.add_insta import Ui_Add_insta
+from screens.post_scheduler import Ui_Post_scheduler
 from PyQt5.QtGui import QPixmap
 import PyQt5
 import sys
@@ -24,20 +24,20 @@ class Ui_Main(QtWidgets.QWidget):
         self.stack3 = QtWidgets.QMainWindow()
         self.stack4 = QtWidgets.QMainWindow()
 
-        self.tela_inicio = Ui_Tela_Inicio()
-        self.tela_inicio.setupUi(self.stack0)
+        self.screen_login = Ui_Login()
+        self.screen_login.setupUi(self.stack0)
 
-        self.tela_cadastro = Ui_Tela_Cadastro()
-        self.tela_cadastro.setupUi(self.stack1)
+        self.screen_sigup = Ui_Signup()
+        self.screen_sigup.setupUi(self.stack1)
 
-        self.tela_principal = Ui_Tela_Principal()
-        self.tela_principal.setupUi(self.stack2)
+        self.screen_home = Ui_Home()
+        self.screen_home.setupUi(self.stack2)
 
-        self.tela_cadastro_livro = Ui_Tela_Cadastro_Livro()
-        self.tela_cadastro_livro.setupUi(self.stack3)
+        self.acreen_add_insta = Ui_Add_insta()
+        self.acreen_add_insta.setupUi(self.stack3)
 
-        self.tela_acervo = Ui_Tela_Acervo()
-        self.tela_acervo.setupUi(self.stack4)
+        self.screen_post_scheduler = Ui_Post_scheduler()
+        self.screen_post_scheduler.setupUi(self.stack4)
 
         self.QtStack.addWidget(self.stack0)
         self.QtStack.addWidget(self.stack1)
