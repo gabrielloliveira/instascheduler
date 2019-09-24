@@ -94,6 +94,14 @@ class Ui_Login(object):
         self.login_button.setText(_translate("MainWindow", "Entrar"))
         self.link_signup.setText(_translate("MainWindow", "É novo aqui? Cadastre-se"))
 
+    def login(self):
+        email = self.email_field.text()
+        password = self.password_field.text()
+
+        # verification to login
+        
+        pass
+
 
 if __name__ == "__main__":
     import sys

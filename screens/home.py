@@ -120,7 +120,7 @@ class Ui_Home(object):
         self.label.setText(_translate("MainWindow", "Status"))
         self.label_5.setText(_translate("MainWindow", "Status"))
 
-import icon_rc
+# import icon_rc
 
 if __name__ == "__main__":
     import sys

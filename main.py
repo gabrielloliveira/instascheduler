@@ -51,44 +51,57 @@ class Main(QMainWindow, Ui_Main):
         super(Main, self).__init__(parent)
         self.setupUi(self)
 
-        self.tela_inicio.botao_entrar.clicked.connect(self.entrar)
-        self.tela_inicio.botao_criar_conta.clicked.connect(self.openCriarConta)
+        self.screen_login.login_button.clicked.connect(self.login)
+        # self.screen_login.link_signup.clicked.connect(self.signup)
 
-        self.tela_cadastro.botao_salvar.clicked.connect(self.criarConta)
-        self.tela_cadastro.toolButton.clicked.connect(self.voltarInicio)
+        # self.tela_inicio.botao_criar_conta.clicked.connect(self.openCriarConta)
 
-        self.tela_principal.cadastrar_novo_livro.clicked.connect(self.openCadastrarLivro)
-        self.tela_principal.ver_acervo.clicked.connect(self.openAcervoLivro)
-        self.tela_principal.sair.clicked.connect(self.voltarInicio)
+        # self.tela_cadastro.botao_salvar.clicked.connect(self.criarConta)
+        # self.tela_cadastro.toolButton.clicked.connect(self.voltarInicio)
 
-        self.tela_cadastro_livro.botao_salvar_livro.clicked.connect(self.cadastrarLivro)
-        self.tela_cadastro_livro.buttonVoltar.clicked.connect(self.voltarPrincipal)
+        # self.tela_principal.cadastrar_novo_livro.clicked.connect(self.openCadastrarLivro)
+        # self.tela_principal.ver_acervo.clicked.connect(self.openAcervoLivro)
+        # self.tela_principal.sair.clicked.connect(self.voltarInicio)
 
-        self.tela_acervo.sair.clicked.connect(self.entrar)
+        # self.tela_cadastro_livro.botao_salvar_livro.clicked.connect(self.cadastrarLivro)
+        # self.tela_cadastro_livro.buttonVoltar.clicked.connect(self.voltarPrincipal)
 
-    def entrar(self):
-        self.QtStack.setCurrentIndex(2)
+        # self.tela_acervo.sair.clicked.connect(self.entrar)
 
-    def openCriarConta(self):
+
+    def login(self):
+        try:
+            self.screen_login.login()
+            self.QtStack.setCurrentIndex(2)
+        except:
+            QtWidgets.QMessageBox.about(None, self, "Cliente não encontrado")
+
+    def signup(self):
         self.QtStack.setCurrentIndex(1)
 
-    def voltarInicio(self):
-        self.QtStack.setCurrentIndex(0)
+    # def entrar(self):
+    #     self.QtStack.setCurrentIndex(2)
 
-    def criarConta(self):
-        self.QtStack.setCurrentIndex(0)
+    # def openCriarConta(self):
+    #     self.QtStack.setCurrentIndex(1)
 
-    def openCadastrarLivro(self):
-        self.QtStack.setCurrentIndex(3)
+    # def voltarInicio(self):
+    #     self.QtStack.setCurrentIndex(0)
 
-    def openAcervoLivro(self):
-        self.QtStack.setCurrentIndex(4)
+    # def criarConta(self):
+    #     self.QtStack.setCurrentIndex(0)
 
-    def voltarPrincipal(self):
-        self.QtStack.setCurrentIndex(2)
+    # def openCadastrarLivro(self):
+    #     self.QtStack.setCurrentIndex(3)
 
-    def cadastrarLivro(self):
-        self.QtStack.setCurrentIndex(2)
+    # def openAcervoLivro(self):
+    #     self.QtStack.setCurrentIndex(4)
+
+    # def voltarPrincipal(self):
+    #     self.QtStack.setCurrentIndex(2)
+
+    # def cadastrarLivro(self):
+    #     self.QtStack.setCurrentIndex(2)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
