@@ -33,8 +33,8 @@ class Ui_Main(QtWidgets.QWidget):
         self.screen_home = Ui_Home()
         self.screen_home.setupUi(self.stack2)
 
-        self.acreen_add_insta = Ui_Add_insta()
-        self.acreen_add_insta.setupUi(self.stack3)
+        self.screen_add_insta = Ui_Add_insta()
+        self.screen_add_insta.setupUi(self.stack3)
 
         self.screen_post_scheduler = Ui_Post_scheduler()
         self.screen_post_scheduler.setupUi(self.stack4)
@@ -52,22 +52,24 @@ class Main(QMainWindow, Ui_Main):
         self.setupUi(self)
 
         self.screen_login.login_button.clicked.connect(self.login)
-        # self.screen_login.link_signup.clicked.connect(self.signup)
+        #self.screen_login.link_signup.clicked.connect(self.signup)
 
-        # self.tela_inicio.botao_criar_conta.clicked.connect(self.openCriarConta)
+        self.screen_sigup.signup_button.clicked.connect(self.signup)
+        #self.screen_login.link_login.clicked.connect(self.signup)
 
-        # self.tela_cadastro.botao_salvar.clicked.connect(self.criarConta)
-        # self.tela_cadastro.toolButton.clicked.connect(self.voltarInicio)
+        self.screen_home.home_button.clicked.connect(self.home)
+        self.screen_home.logout_button.clicked.connect(self.logout)
+        self.screen_home.pushButton_4.clicked.connect(self.add_insta)
+        self.screen_home.pushButton_3.clicked.connect(self.post_scheduler)
 
-        # self.tela_principal.cadastrar_novo_livro.clicked.connect(self.openCadastrarLivro)
-        # self.tela_principal.ver_acervo.clicked.connect(self.openAcervoLivro)
-        # self.tela_principal.sair.clicked.connect(self.voltarInicio)
+        self.screen_add_insta.home_button.clicked.connect(self.come_back)
+        self.screen_add_insta.logout_button.clicked.connect(self.logout)
+        self.screen_add_insta.add_button.clicked.connect(self.add)
 
-        # self.tela_cadastro_livro.botao_salvar_livro.clicked.connect(self.cadastrarLivro)
-        # self.tela_cadastro_livro.buttonVoltar.clicked.connect(self.voltarPrincipal)
-
-        # self.tela_acervo.sair.clicked.connect(self.entrar)
-
+        self.screen_post_scheduler.home_button.clicked.connect(self.come_back)
+        self.screen_post_scheduler.logout_button.clicked.connect(self.logout)
+        self.screen_post_scheduler.button_upload.clicked.connect(self.upload)
+        self.screen_post_scheduler.scheduler_button.clicked.connect(self.scheduler)
 
     def login(self):
         try:
@@ -78,6 +80,31 @@ class Main(QMainWindow, Ui_Main):
 
     def signup(self):
         self.QtStack.setCurrentIndex(1)
+    
+    def home(self):
+        self.QtStack.setCurrentIndex(2) 
+
+    def logout(self):
+        self.QtStack.setCurrentIndex(0) 
+
+    def add_insta(self):
+        self.QtStack.setCurrentIndex(3) 
+
+    def post_scheduler(self):
+        self.QtStack.setCurrentIndex(4) 
+
+    def come_back(self):
+        self.QtStack.setCurrentIndex(2) 
+
+    def add(self):
+        pass
+    
+    def upload(self):
+        pass
+
+    def scheduler(self):
+        pass
+        
 
     # def entrar(self):
     #     self.QtStack.setCurrentIndex(2)
