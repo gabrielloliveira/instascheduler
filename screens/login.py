@@ -7,6 +7,11 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import socket
+import pickle
+
+addr = (('localhost', 7000))
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 class Ui_Login(object):
     def setupUi(self, MainWindow):
@@ -98,9 +103,28 @@ class Ui_Login(object):
         email = self.email_field.text()
         password = self.password_field.text()
 
-        # verification to login
-        
-        pass
+        try:
+            client_socket.connect(addr)
+            
+            message = {
+                'func': 'login',
+                'email': email,
+                'password': password
+            }
+            
+            while(True):
+                client_socket.send(pickle.dumps(message))
+                response = pickle.loads(client_socket.recv(1024))
+                client_socket.close()
+                if response['status'] == 'success':
+                    print("=========== resposta do server success")
+                    return 1
+                else:
+                    print("=========== resposta do server erro")
+                    return Exception('Usuário não encontrado!') 
+
+        except:
+            return Exception('Erro ao fazer a conexão!')
 
 
 if __name__ == "__main__":
