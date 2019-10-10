@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'signup.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.1
+# Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_Signup(object):
     def setupUi(self, MainWindow):
@@ -58,11 +56,13 @@ class Ui_Signup(object):
         self.columnView_2.setStyleSheet("background-color: white;\n"
 "border: 1px solid #f7f7f7;")
         self.columnView_2.setObjectName("columnView_2")
-        self.link_login = QtWidgets.QCommandLinkButton(self.centralwidget)
-        self.link_login.setGeometry(QtCore.QRect(290, 280, 231, 41))
+        self.link_login = QtWidgets.QLabel(self.centralwidget)
+        self.link_login.setGeometry(QtCore.QRect(310, 280, 201, 20))
+        self.link_login.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.link_login.setStyleSheet("font-size:14px;\n"
 "color: #3897F0;\n"
 "text-decoration: underline;")
+        self.link_login.setAlignment(QtCore.Qt.AlignCenter)
         self.link_login.setObjectName("link_login")
         self.columnView.raise_()
         self.columnView_2.raise_()
@@ -75,7 +75,7 @@ class Ui_Signup(object):
         self.link_login.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 23))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -94,6 +94,7 @@ class Ui_Signup(object):
         self.signup_button.setText(_translate("MainWindow", "Cadastrar"))
         self.link_login.setText(_translate("MainWindow", "Já tem uma conta? Faça login"))
 
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -102,3 +103,4 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
