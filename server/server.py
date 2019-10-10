@@ -19,7 +19,7 @@ def login(received):
     return result
 
 while(True):
-    received = pickle.loads(con.recv(1024))
+    received = pickle.loads(con.recv(6144))
     func = received['func']
     try:
         result = eval(f'{func}')(received)

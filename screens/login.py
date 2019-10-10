@@ -6,9 +6,11 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 import socket
 import pickle
+import struct
 
 addr = (('localhost', 7000))
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -111,17 +113,16 @@ class Ui_Login(object):
             
             while(True):
                 client_socket.send(pickle.dumps(message))
-                response = pickle.loads(client_socket.recv(1024))
+                response = pickle.loads(client_socket.recv(6144))
                 client_socket.close()
-                if response['status'] == 'success':
-                    print("=========== resposta do server success")
-                    return 1
-                else:
-                    print("=========== resposta do server erro")
-                    return Exception('Usuário não encontrado!') 
+                response = 1
+                if response['status'] != 'success':
+                    response = 0
+
+                return response
 
         except:
-            return Exception('Erro ao fazer a conexão!')
+            return 0
 
 
 if __name__ == "__main__":

@@ -73,8 +73,11 @@ class Main(QMainWindow, Ui_Main):
 
     def login(self):
         try:
-            self.screen_login.login()
-            self.QtStack.setCurrentIndex(2)
+            response = self.screen_login.login()
+            if response:
+                self.QtStack.setCurrentIndex(2)
+            else:
+                QtWidgets.QMessageBox.about(None, self, "Cliente não encontrado")
         except:
             QtWidgets.QMessageBox.about(None, self, "Cliente não encontrado")
 
