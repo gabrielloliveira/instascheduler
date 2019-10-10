@@ -6,9 +6,12 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
+import socket
+import pickle
 
+addr = (('localhost', 7000))
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 class Ui_Login(object):
     def setupUi(self, MainWindow):
