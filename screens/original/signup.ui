@@ -144,14 +144,17 @@ border-radius: 16px;</string>
 border: 1px solid #f7f7f7;</string>
     </property>
    </widget>
-   <widget class="QCommandLinkButton" name="link_login">
+   <widget class="QLabel" name="link_login">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>310</x>
       <y>280</y>
-      <width>231</width>
-      <height>41</height>
+      <width>201</width>
+      <height>20</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">font-size:14px;
@@ -160,6 +163,9 @@ text-decoration: underline;</string>
     </property>
     <property name="text">
      <string>Já tem uma conta? Faça login</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <zorder>columnView</zorder>
@@ -178,7 +184,7 @@ text-decoration: underline;</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>

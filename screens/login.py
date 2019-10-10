@@ -2,16 +2,13 @@
 
 # Form implementation generated from reading ui file 'login.ui'
 #
-# Created by: PyQt5 UI code generator 5.9.2
+# Created by: PyQt5 UI code generator 5.13.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-import socket
-import pickle
 
-addr = (('localhost', 7000))
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Login(object):
     def setupUi(self, MainWindow):
@@ -61,13 +58,11 @@ class Ui_Login(object):
         self.columnView_2.setStyleSheet("background-color: white;\n"
 "border: 1px solid #f7f7f7;")
         self.columnView_2.setObjectName("columnView_2")
-        self.link_signup = QtWidgets.QLabel(self.centralwidget)
-        self.link_signup.setGeometry(QtCore.QRect(310, 280, 181, 20))
-        self.link_signup.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.link_signup = QtWidgets.QCommandLinkButton(self.centralwidget)
+        self.link_signup.setGeometry(QtCore.QRect(290, 280, 201, 41))
         self.link_signup.setStyleSheet("font-size:14px;\n"
 "color: #3897F0;\n"
 "text-decoration: underline;")
-        self.link_signup.setAlignment(QtCore.Qt.AlignCenter)
         self.link_signup.setObjectName("link_signup")
         self.columnView.raise_()
         self.columnView_2.raise_()
@@ -80,7 +75,7 @@ class Ui_Login(object):
         self.link_signup.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 23))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -98,7 +93,6 @@ class Ui_Login(object):
         self.label_3.setText(_translate("MainWindow", "Senha:"))
         self.login_button.setText(_translate("MainWindow", "Entrar"))
         self.link_signup.setText(_translate("MainWindow", "É novo aqui? Cadastre-se"))
-
     def login(self):
         email = self.email_field.text()
         password = self.password_field.text()
@@ -135,4 +129,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-

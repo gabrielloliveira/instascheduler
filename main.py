@@ -27,8 +27,8 @@ class Ui_Main(QtWidgets.QWidget):
         self.screen_login = Ui_Login()
         self.screen_login.setupUi(self.stack0)
 
-        self.screen_sigup = Ui_Signup()
-        self.screen_sigup.setupUi(self.stack1)
+        self.screen_signup = Ui_Signup()
+        self.screen_signup.setupUi(self.stack1)
 
         self.screen_home = Ui_Home()
         self.screen_home.setupUi(self.stack2)
@@ -52,10 +52,10 @@ class Main(QMainWindow, Ui_Main):
         self.setupUi(self)
 
         self.screen_login.login_button.clicked.connect(self.login)
-        #self.screen_login.link_signup.clicked.connect(self.signup)
+        self.screen_login.link_signup.clicked.connect(self.signup)
 
-        self.screen_sigup.signup_button.clicked.connect(self.signup)
-        #self.screen_login.link_login.clicked.connect(self.signup)
+        self.screen_signup.signup_button.clicked.connect(self.screensLogin)
+        self.screen_signup.link_login.clicked.connect(self.screensLogin)
 
         self.screen_home.home_button.clicked.connect(self.home)
         self.screen_home.logout_button.clicked.connect(self.logout)
@@ -78,8 +78,11 @@ class Main(QMainWindow, Ui_Main):
         except:
             QtWidgets.QMessageBox.about(None, self, "Cliente não encontrado")
 
+    def screensLogin(self):
+        self.QtStack.setCurrentIndex(0)
+
     def signup(self):
-        self.QtStack.setCurrentIndex(1)
+        self.QtStack.setCurrentIndex(1) 
     
     def home(self):
         self.QtStack.setCurrentIndex(2) 
