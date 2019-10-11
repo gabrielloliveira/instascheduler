@@ -77,9 +77,9 @@ class Main(QMainWindow, Ui_Main):
             if response:
                 self.QtStack.setCurrentIndex(2)
             else:
-                QtWidgets.QMessageBox.about(None, self, "Cliente não encontrado")
+                QtWidgets.QMessageBox.about(None, "Login", "Cliente não encontrado")
         except:
-            QtWidgets.QMessageBox.about(None, self, "Cliente não encontrado")
+            QtWidgets.QMessageBox.about(None, "Login", "Cliente não encontrado")
 
     def screensLogin(self):
         self.QtStack.setCurrentIndex(0)
