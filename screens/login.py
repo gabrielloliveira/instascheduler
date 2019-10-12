@@ -113,7 +113,7 @@ class Ui_Login(object):
             
             while(True):
                 client_socket.send(pickle.dumps(message))
-                response = pickle.loads(client_socket.recv(1000))
+                response = pickle.loads(client_socket.recv(6144))
                 client_socket.close()
                 response = 1
                 if response['status'] != 'success':
