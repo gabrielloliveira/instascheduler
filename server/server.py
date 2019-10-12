@@ -22,19 +22,39 @@ class ClientThread(threading.Thread):
 
     def run(self):
         while(True):
-            received = pickle.loads(self.csocket.recv(6144))
+            data = b""
+            while True:
+                # print('eii1')
+                packet = self.csocket.recv(4096)
+                if not packet: break
+                data += packet
+                break
+                # print('eii')
+
+            
+            try:
+                # print('disgraca1')
+                data_arr = pickle.loads(data)  
+                # print('disgraca')
+            except EOFError:
+                continue  
+            received = data_arr 
+            print('deu certo', data_arr)
+            # received = pickle.loads(self.csocket.recv())
             func = received['func']
             try:
-                result = eval(f'{func}')(received)
+                # result = eval(f'{func}')(received)
                 message = {
-                    'status': 'success' if result is not None else 'error'
+                    'status': 'success' 
+                    # 'status': 'success' if result is not None else 'error'
                 }
-                self.csocket.send(pickle.dumps(message))
+                # self.csocket.send(pickle.dumps(message))
+                self.csocket.send(message.encode())
 
             except:
-                serv_socket.close()
-
-        serv_socket.close()
+                self.csocket.close()
+            break
+        self.csocket.close()
 
 if __name__ == '__main__':
     addr = ("localhost", 7000)
