@@ -21,20 +21,25 @@ class ClientThread(threading.Thread):
         print ("Nova conexao: ", clientAddress)
 
     def run(self):
-        while(True):
+        # while(True): //juguei q n é necessario ficar em loop devido a conecção q é fechada 
+        try:
             received = pickle.loads(self.csocket.recv(6144))
-            func = received['func']
-            try:
-                result = eval(f'{func}')(received)
-                message = {
-                    'status': 'success' if result is not None else 'error'
-                }
-                self.csocket.send(pickle.dumps(message))
+            print(received)
+        except:
+            pass
+        func = received['func']
+        # try:
+        result = eval(f'{func}')(received)
+        message = {
+            'status': 'success' if result is not None else 'error'
+        }
+        print(message)
+        self.csocket.send(pickle.dumps(message))
 
-            except:
-                serv_socket.close()
+        # except:
+        self.csocket.close()
 
-        serv_socket.close()
+        # self.csocket.close()
 
 if __name__ == '__main__':
     addr = ("localhost", 7000)

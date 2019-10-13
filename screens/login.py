@@ -13,7 +13,6 @@ import pickle
 import struct
 
 addr = (('localhost', 7000))
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 class Ui_Login(object):
     def setupUi(self, MainWindow):
@@ -99,30 +98,32 @@ class Ui_Login(object):
         self.login_button.setText(_translate("MainWindow", "Entrar"))
         self.link_signup.setText(_translate("MainWindow", "É novo aqui? Cadastre-se"))
     def login(self):
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         email = self.email_field.text()
         password = self.password_field.text()
 
-        try:
-            client_socket.connect(addr)
-            
-            message = {
-                'func': 'login',
-                'email': email,
-                'password': password
-            }
-            
-            while(True):
-                client_socket.send(pickle.dumps(message))
-                response = pickle.loads(client_socket.recv(6144))
-                client_socket.close()
-                response = 1
-                if response['status'] != 'success':
-                    response = 0
+        # try:
+        client_socket.connect(addr)
+        
+        message = {
+            'func': 'login',
+            'email': email,
+            'password': password
+        }
+        
+        while(True):
+            client_socket.send(pickle.dumps(message))
+            response = pickle.loads(client_socket.recv(6144))
+            client_socket.close()
+            print(response)
+            res = 1
+            if response['status'] != 'success':
+                res = 0
 
-                return response
+            return res
 
-        except:
-            return 0
+        # except:
+        #     return 0
 
 
 if __name__ == "__main__":
