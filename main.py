@@ -116,6 +116,12 @@ class Main(QMainWindow, Ui_Main):
         pass
     
     def upload(self):
+        from PyQt5 import QtWidgets
+        from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog
+        from PyQt5.QtGui import QIcon
+        filename = QFileDialog.getOpenFileName()
+        path = filename[0]
+        print(path)
         pass
 
     def scheduler(self):
