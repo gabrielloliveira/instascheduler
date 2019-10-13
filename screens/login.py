@@ -97,6 +97,7 @@ class Ui_Login(object):
         self.label_3.setText(_translate("MainWindow", "Senha:"))
         self.login_button.setText(_translate("MainWindow", "Entrar"))
         self.link_signup.setText(_translate("MainWindow", "É novo aqui? Cadastre-se"))
+    
     def login(self):
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         email = self.email_field.text()
