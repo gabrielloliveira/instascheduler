@@ -8,6 +8,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import socket
+import pickle
+import struct
+
+addr = (('localhost', 7000))
 
 
 class Ui_Signup(object):
@@ -93,6 +98,30 @@ class Ui_Signup(object):
         self.label_3.setText(_translate("MainWindow", "Senha:"))
         self.signup_button.setText(_translate("MainWindow", "Cadastrar"))
         self.link_login.setText(_translate("MainWindow", "Já tem uma conta? Faça login"))
+
+    def signup(self):
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        email = self.email_field.text()
+        password = self.password_field.text()
+
+        client_socket.connect(addr)
+        
+        message = {
+            'func': 'signup',
+            'email': email,
+            'password': password
+        }
+        
+        while(True):
+            client_socket.send(pickle.dumps(message))
+            response = pickle.loads(client_socket.recv(6144))
+            client_socket.close()
+            print(response)
+            res = 1
+            if response['status'] != 'success':
+                res = 0
+
+            return res
 
 if __name__ == "__main__":
     import sys

@@ -1,3 +1,4 @@
+from hash import hash_password, verify_password
 import sqlite3
 import os
 
@@ -26,16 +27,48 @@ class Connector():
         self._conn = sqlite3.connect(self._db_path)
         self._cursor = self._conn.cursor()
 
+    def return_password(self, data):
+        if data:
+            result = data[0]
+            return result[2]
+        
     def search_user(self, email, password):
         self.connect_db()
 
         try:
             with self._conn:
                 result = self._cursor.execute("""
-                SELECT * FROM user WHERE email=? and password=?
-                """, (email, password))
+                SELECT * FROM user WHERE email=?
+                """, (email,))
+                stored_password = self.return_password(result.fetchall())
 
-                return result.fetchone()
+                if stored_password is not None and verify_password(stored_password, password):
+                    return True
+
+            return None
+
+        finally:
+            self._conn.close()
+
+    def add_user(self, email, password):
+        self.connect_db()
+
+        try:
+            with self._conn:
+                result = self._cursor.execute("""
+                SELECT * FROM user WHERE email=?
+                """, (email,))
+
+                if result.fetchone() is None:
+                    new_password = hash_password(password)
+
+                    self._cursor.execute("""
+                    INSERT INTO user (email, password) values (?, ?)
+                    """, (email, new_password))
+
+                    self._conn.commit()
+
+                    return True
 
             return None
 

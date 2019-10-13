@@ -13,6 +13,13 @@ def login(received):
     result = conn.search_user(email, password)
     return result
 
+def signup(received):
+    email = received['email']
+    password = received['password']
+    conn = Connector()
+    result = conn.add_user(email, password)
+    return result
+    
 class ClientThread(threading.Thread):
     def __init__(self,clientAddress,clientsocket):
         threading.Thread.__init__(self)

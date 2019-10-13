@@ -54,7 +54,7 @@ class Main(QMainWindow, Ui_Main):
         self.screen_login.login_button.clicked.connect(self.login)
         self.screen_login.link_signup.clicked.connect(self.signup)
 
-        self.screen_signup.signup_button.clicked.connect(self.screensLogin)
+        self.screen_signup.signup_button.clicked.connect(self.add_user)
         self.screen_signup.link_login.clicked.connect(self.screensLogin)
 
         self.screen_home.home_button.clicked.connect(self.home)
@@ -83,6 +83,16 @@ class Main(QMainWindow, Ui_Main):
 
     def screensLogin(self):
         self.QtStack.setCurrentIndex(0)
+    
+    def add_user(self):
+        try:
+            response = self.screen_signup.signup()
+            if response:
+                self.QtStack.setCurrentIndex(0)
+            else:
+                QtWidgets.QMessageBox.about(None, "Cadastro", "Não foi possível fazer o cadastro!")
+        except:
+            QtWidgets.QMessageBox.about(None, "Cadastro", "Não foi possível fazer o cadastro!")
 
     def signup(self):
         self.QtStack.setCurrentIndex(1) 
