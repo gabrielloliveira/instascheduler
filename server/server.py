@@ -11,7 +11,6 @@ def login(received):
     password = received['password']
     conn = Connector()
     result = conn.search_user(email, password)
-    conn.close()
     return result
 
 class ClientThread(threading.Thread):
