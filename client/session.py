@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+import os
 
 class Session():
     __instance = None
@@ -12,8 +13,10 @@ class Session():
             
     @property
     def user(self):
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        json_path = os.path.join(BASE_DIR, "data.json")
         try:
-            with open('data.json', 'r') as f:
+            with open(json_path, 'r') as f:
                 data = json.load(f)
                 return data['user']
 
@@ -21,9 +24,11 @@ class Session():
             return None        
 
     def set_data(self, email):
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        json_path = os.path.join(BASE_DIR, "data.json")
         data = {
             'user': email,
             'login_at': str(datetime.now())
         }
-        with open('data.json', 'w', encoding='utf-8') as f:
+        with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
