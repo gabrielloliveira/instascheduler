@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QMessageBox, QApplication, QTableWidgetItem
+from PyQt5.QtWidgets import QMainWindow, QMessageBox, QApplication, QTableWidgetItem, QFileDialog
 from screens.login import Ui_Login
 from screens.signup import Ui_Signup
 from screens.home import Ui_Home
@@ -130,35 +130,12 @@ class Main(QMainWindow, Ui_Main):
         pass
     
     def upload(self):
-        pass
+        filename = QFileDialog.getOpenFileName()
+        path = filename[0]
+            
 
     def scheduler(self):
         pass
-        
-
-    # def entrar(self):
-    #     self.QtStack.setCurrentIndex(2)
-
-    # def openCriarConta(self):
-    #     self.QtStack.setCurrentIndex(1)
-
-    # def voltarInicio(self):
-    #     self.QtStack.setCurrentIndex(0)
-
-    # def criarConta(self):
-    #     self.QtStack.setCurrentIndex(0)
-
-    # def openCadastrarLivro(self):
-    #     self.QtStack.setCurrentIndex(3)
-
-    # def openAcervoLivro(self):
-    #     self.QtStack.setCurrentIndex(4)
-
-    # def voltarPrincipal(self):
-    #     self.QtStack.setCurrentIndex(2)
-
-    # def cadastrarLivro(self):
-    #     self.QtStack.setCurrentIndex(2)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
