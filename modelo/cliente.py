@@ -3,7 +3,7 @@ import socket
 import pickle
 arquivo = 'img.jpeg'
 host = '127.0.0.1'
-porta = 6124
+porta = 7000
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # Cria nosso objeto socket
 sock.connect((host, porta))
 

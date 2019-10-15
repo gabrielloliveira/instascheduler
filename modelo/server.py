@@ -2,6 +2,7 @@ import struct
 import time
 import pickle
 import socket, threading
+import os
 
 # host = "127.0.0.1"
 # porta = 6124
@@ -16,9 +17,16 @@ import socket, threading
 def post(msg):
     nome = msg['nome']
     dados = msg['dados']
-    with open(('arquivos_recebidos/'+nome), 'wb') as f:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    img_path = os.path.join(BASE_DIR, f"recebidos/{nome}")
+
+    print("======= caminoho", img_path)
+    
+    with open((img_path), 'wb') as f:
         f.write(dados)
         f.close()
+
+    print("======= terminou o processamento")
 
 
 class ClientThread(threading.Thread):
@@ -30,8 +38,9 @@ class ClientThread(threading.Thread):
     def run(self):
         data = b''
         while True:
-            packet = self.csocket.recv(4096)
-            if not packet: break
+            packet = self.csocket.recv(6111)
+            if not packet: 
+                break
             data += packet
         msg = pickle.loads(data)
         func = msg['func']
