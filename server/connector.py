@@ -75,5 +75,38 @@ class Connector():
         finally:
             self._conn.close()
 
+
+    def add_insta(self, username, password, email):
+        self.connect_db()
+
+        try:
+            with self._conn:
+                instagram = self._cursor.execute("""
+                SELECT * FROM instagram WHERE username=?
+                """, (username,))
+                
+                instagram = instagram.fetchall()
+
+                user = self._cursor.execute("""
+                SELECT * FROM user where email=?
+                """, (email,))
+
+                user = user.fetchone()
+
+                if not instagram and user is not None:
+                    self._cursor.execute("""
+                    INSERT INTO instagram (username, password, user) values (?, ?, ?)
+                    """, (username, password, user[0]))
+
+                    self._conn.commit()
+                    print("===== passou")
+
+                    return True
+
+            return None
+
+        finally:
+            self._conn.close()
+
     def close(self):
         self._conn.close()
