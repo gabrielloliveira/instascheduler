@@ -7,6 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from client.session import Session
+
+addr = (('localhost', 7000))
 
 class Ui_Post_scheduler(object):
     def setupUi(self, MainWindow):
@@ -167,7 +170,6 @@ class Ui_Post_scheduler(object):
         self.label_6.setText(_translate("MainWindow", "Data do post:"))
         self.home_button.setText(_translate("MainWindow", "Voltar"))
         self.logout_button.setText(_translate("MainWindow", "Sair"))
-
 
 if __name__ == "__main__":
     import sys

@@ -50,6 +50,7 @@ class Ui_Main(QtWidgets.QWidget):
 class Main(QMainWindow, Ui_Main):
     def __init__(self, parent=None):
         super(Main, self).__init__(parent)
+        self.upload_path = None
         self.setupUi(self)
 
         self.screen_login.login_button.clicked.connect(self.login)
@@ -132,10 +133,20 @@ class Main(QMainWindow, Ui_Main):
     def upload(self):
         filename = QFileDialog.getOpenFileName()
         path = filename[0]
+        self.upload_path = path
             
 
     def scheduler(self):
-        pass
+        response = self.screen_post_scheduler.add(self.upload_path)
+        try:
+            if response:
+                QtWidgets.QMessageBox.about(None, "Agendar Postagem", "Agendamento gravada com sucesso!")
+                self.QtStack.setCurrentIndex(2)
+            else:
+                QtWidgets.QMessageBox.about(None, "Agendar Postagem", "Não foi possível Agendar a postagem!")
+        except:
+            QtWidgets.QMessageBox.about(None, "Agendar Postagem", "1Não foi possível Agendar a postagem!")
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
