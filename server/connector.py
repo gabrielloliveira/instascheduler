@@ -1,4 +1,5 @@
 from hash import hash_password, verify_password
+from datetime import datetime
 import sqlite3
 import os
 
@@ -75,7 +76,6 @@ class Connector():
         finally:
             self._conn.close()
 
-
     def add_insta(self, username, password, email):
         self.connect_db()
 
@@ -101,6 +101,45 @@ class Connector():
                     self._conn.commit()
 
                     return True
+
+            return None
+
+        finally:
+            self._conn.close()
+
+    def add_schedule(self, img_path, subtitle, location, username, date, email):
+        self.connect_db()
+
+        try:
+            with self._conn:
+                user = self._cursor.execute("""
+                SELECT * FROM user where email=?
+                """, (email,))
+
+                user = user.fetchone()
+
+                if user is None:
+                    return None
+                
+                instagram = self._cursor.execute("""
+                SELECT * FROM instagram WHERE username=? and user=?
+                """, (username, user[0]))
+                
+                instagram = instagram.fetchone()
+
+                if instagram is None:
+                    return None
+
+                date_now = str(datetime.now())
+
+                self._cursor.execute("""
+                INSERT INTO scheduler (image, subtitle, location, account, created, date_scheduler) 
+                values (?, ?, ?, ?, ?, ?)
+                """, (img_path, subtitle, location, instagram[0], date_now, date))
+
+                self._conn.commit()
+
+                return True
 
             return None
 
