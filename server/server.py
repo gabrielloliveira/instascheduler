@@ -2,6 +2,7 @@ from connector import Connector
 import socket, threading
 import socket
 import pickle
+import os
 
 
 # con, cliente = serv_socket.accept()
@@ -27,6 +28,22 @@ def add_insta(received):
     conn = Connector()
     result = conn.add_insta(username, password, user)
     return result
+
+
+def post(msg):
+    nome = msg['nome']
+    dados = msg['dados']
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    img_path = os.path.join(BASE_DIR, f"recebidos/{nome}")
+
+    print("======= caminoho", img_path)
+    
+    with open((img_path), 'wb') as f:
+        f.write(dados)
+        f.close()
+
+    print("======= terminou o processamento")
+
     
 class ClientThread(threading.Thread):
     def __init__(self,clientAddress,clientsocket):
@@ -35,12 +52,20 @@ class ClientThread(threading.Thread):
         print ("Nova conexao: ", clientAddress)
 
     def run(self):
-        try:
-            received = pickle.loads(self.csocket.recv(6144))
-            print(received)
-        except:
-            pass
+
+        data = b''
         
+        while True:
+            packet = self.csocket.recv(6144) 
+            data += packet
+            try:
+                received = pickle.loads(data)
+                break
+            except:
+                pass
+            
+        received = pickle.loads(data)
+
         func = received['func']
         result = eval(f'{func}')(received)
         message = {
