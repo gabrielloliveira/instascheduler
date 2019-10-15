@@ -99,7 +99,6 @@ class Connector():
                     """, (username, password, user[0]))
 
                     self._conn.commit()
-                    print("===== passou")
 
                     return True
 
