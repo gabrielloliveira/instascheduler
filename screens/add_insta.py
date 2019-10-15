@@ -7,6 +7,12 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from client.session import Session
+import socket
+import pickle
+import struct
+
+addr = (('localhost', 7000))
 
 class Ui_Add_insta(object):
     def setupUi(self, MainWindow):
@@ -135,6 +141,34 @@ class Ui_Add_insta(object):
         self.home_button.setText(_translate("MainWindow", "Voltar"))
         self.logout_button.setText(_translate("MainWindow", "Sair"))
         self.label_6.setText(_translate("MainWindow", "Senha"))
+
+    def add(self):
+        session = Session('name')
+        
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        username = self.username_field.text()   
+        password = self.password_field.text()
+
+        # try:
+        client_socket.connect(addr)
+        
+        message = {
+            'func': 'add_insta',
+            'username': username,
+            'password': password,
+            'user': session.user,
+        }
+        
+        while(True):
+            client_socket.send(pickle.dumps(message))
+            response = pickle.loads(client_socket.recv(6144))
+            client_socket.close()
+            print(response)
+            res = 1
+            if response['status'] != 'success':
+                res = 0
+
+            return res
 
 
 if __name__ == "__main__":

@@ -19,6 +19,14 @@ def signup(received):
     conn = Connector()
     result = conn.add_user(email, password)
     return result
+
+def add_insta(received):
+    username = received['username']
+    password = received['password']
+    user = received['user']
+    conn = Connector()
+    result = conn.add_insta(username, password, user)
+    return result
     
 class ClientThread(threading.Thread):
     def __init__(self,clientAddress,clientsocket):
@@ -27,25 +35,20 @@ class ClientThread(threading.Thread):
         print ("Nova conexao: ", clientAddress)
 
     def run(self):
-        # while(True): //juguei q n é necessario ficar em loop devido a conecção q é fechada 
         try:
             received = pickle.loads(self.csocket.recv(6144))
             print(received)
         except:
             pass
+        
         func = received['func']
-        # try:
         result = eval(f'{func}')(received)
         message = {
             'status': 'success' if result is not None else 'error'
         }
         print(message)
         self.csocket.send(pickle.dumps(message))
-
-        # except:
         self.csocket.close()
-
-        # self.csocket.close()
 
 if __name__ == '__main__':
     addr = ("localhost", 7000)

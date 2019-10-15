@@ -10,6 +10,7 @@ import PyQt5
 import sys
 import os
 from PyQt5.QtCore import pyqtSlot
+from client.session import Session
 
 class Ui_Main(QtWidgets.QWidget):
     def setupUi(self, Main):
@@ -64,7 +65,7 @@ class Main(QMainWindow, Ui_Main):
 
         self.screen_add_insta.home_button.clicked.connect(self.come_back)
         self.screen_add_insta.logout_button.clicked.connect(self.logout)
-        self.screen_add_insta.add_button.clicked.connect(self.add)
+        self.screen_add_insta.add_button.clicked.connect(self.add_insta_clicked)
 
         self.screen_post_scheduler.home_button.clicked.connect(self.come_back)
         self.screen_post_scheduler.logout_button.clicked.connect(self.logout)
@@ -75,6 +76,8 @@ class Main(QMainWindow, Ui_Main):
         try:
             response = self.screen_login.login()
             if response:
+                session = Session(self.screen_login.email_field.text())
+                session.set_data(self.screen_login.email_field.text())
                 self.QtStack.setCurrentIndex(2)
             else:
                 QtWidgets.QMessageBox.about(None, "Login", "Cliente não encontrado")
@@ -94,6 +97,17 @@ class Main(QMainWindow, Ui_Main):
         except:
             QtWidgets.QMessageBox.about(None, "Cadastro", "Não foi possível fazer o cadastro!")
 
+    def add_insta_clicked(self):
+        try:
+            response = self.screen_add_insta.add()
+            if response:
+                QtWidgets.QMessageBox.about(None, "Adicionar Instagram", "Instagram gravado com sucesso!")
+                self.QtStack.setCurrentIndex(2)
+            else:
+                QtWidgets.QMessageBox.about(None, "Adicionar Instagram", "Não foi possível adicionar o instagram!")
+        except:
+            QtWidgets.QMessageBox.about(None, "Adicionar Instagram", "Não foi possível adicionar o instagram!")
+    
     def signup(self):
         self.QtStack.setCurrentIndex(1) 
     
