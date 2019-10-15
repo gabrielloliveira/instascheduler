@@ -8,6 +8,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from client.session import Session
+from datetime import datetime
+import socket
+import pickle
 
 addr = (('localhost', 7000))
 
@@ -170,6 +173,45 @@ class Ui_Post_scheduler(object):
         self.label_6.setText(_translate("MainWindow", "Data do post:"))
         self.home_button.setText(_translate("MainWindow", "Voltar"))
         self.logout_button.setText(_translate("MainWindow", "Sair"))
+
+    def add(self, path):
+        session = Session('name')
+        
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        subtitle = self.subtitle_field.toPlainText()
+        instagram = self.instagram_field.text()
+        date_str = self.date_scheduler_field.text()  
+        date = datetime.strptime(date_str, '%d/%m/%Y %H:%M') 
+        print(date)
+
+        client_socket.connect(addr)
+
+        with open(path, 'rb') as arq:
+            binary_image = arq.read()
+            arq.close()
+        
+        img = path.split('/')[-1]
+        message = {
+            'func': 'schedule_posting',
+            'img': img,
+            'binary_image': binary_image,
+            'subtitle': subtitle,
+            'location': 'location',
+            'instagram': instagram,
+            'date': date,
+            'user': session.user,
+        }
+        
+        while(True):
+            client_socket.send(pickle.dumps(message))
+            response = pickle.loads(client_socket.recv(6144))
+            client_socket.close()
+            print(response)
+            res = 1
+            if response['status'] != 'success':
+                res = 0
+
+            return res
 
 if __name__ == "__main__":
     import sys

@@ -34,6 +34,7 @@ def add_insta(received):
 def schedule_posting(received):
     user = received['user']
     img = received['img']
+    binary_image = received['binary_image']
     subtitle = received['subtitle']
     location = received['location']
     instagram = received['instagram']
@@ -42,11 +43,11 @@ def schedule_posting(received):
     date_image = f'{datetime.now().year}-' + f'{datetime.now().month}-' + f'{datetime.now().day}'
 
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    img_path = os.path.join(BASE_DIR, f"uploads/{date_image}-{user}-{nome}")
+    img_path = os.path.join(BASE_DIR, f"uploads/{date_image}-{user}-{img}")
 
     # Salvando a imagem na pasta upload com o nome padrão : yyyy-mm-dd-email-name.jpeg
     with open((img_path), 'wb') as f:
-        f.write(dados)
+        f.write(binary_image)
         f.close()
 
     conn = Connector()
