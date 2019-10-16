@@ -36,3 +36,5 @@
 - Transformar todos os inputs que pegam as senhas com as devidas seguranças. (ao invés de aparecer a senha, propriamente ditas, mostrar com os pontinhos * * * * *).
 
 - Melhorar as respostas do server para uma melhor experiência com o usuário. Por exemplo, caso não tenha dado certo o login com o email e senha informado, o sistema apenas exibe "não foi possível realizar o login". Mas não se sabe qual foi o verdadeiro motivo. O servidor está fora? email ou senha incorretos?
+
+- Criar alguma espécie de *jobs* que ficam verificando se existe postagens pendentes para enviar para a API do instagram. Caso exista, ele manda a requisção.
