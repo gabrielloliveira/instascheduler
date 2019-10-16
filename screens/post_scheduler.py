@@ -181,9 +181,8 @@ class Ui_Post_scheduler(object):
         subtitle = self.subtitle_field.toPlainText()
         instagram = self.instagram_field.text()
         date_str = self.date_scheduler_field.text()  
-        date = datetime.strptime(date_str, '%d/%m/%Y %H:%M') 
-        print(date)
-
+        date = datetime.strptime(date_str, "%d/%m/%y %H:%M") 
+        
         client_socket.connect(addr)
 
         with open(path, 'rb') as arq:
