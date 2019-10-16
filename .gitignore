@@ -109,4 +109,7 @@ venv.bak/
 
 data.json
 
-server/uploads/
+server/uploads/*.jpg
+server/uploads/*.png
+server/uploads/*.jpeg
+
