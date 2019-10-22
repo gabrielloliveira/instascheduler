@@ -45,13 +45,14 @@ def schedule_posting(received):
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     img_path = os.path.join(BASE_DIR, f"uploads/{date_image}-{user}-{img}")
 
-    # Salvando a imagem na pasta upload com o nome padrão : yyyy-mm-dd-email-name.jpeg
-    with open((img_path), 'wb') as f:
-        f.write(binary_image)
-        f.close()
 
     conn = Connector()
     result = conn.add_schedule(img_path, subtitle, location, instagram, date, user)
+    if result != None:
+        # Salvando a imagem na pasta upload com o nome padrão : yyyy-mm-dd-email-name.jpeg
+        with open((img_path), 'wb') as f:
+            f.write(binary_image)
+            f.close()
     return result
     
 class ClientThread(threading.Thread):
