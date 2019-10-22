@@ -85,7 +85,7 @@ class ClientThread(threading.Thread):
         self.csocket.close()
 
 if __name__ == '__main__':
-    addr = ("localhost", 7000)
+    addr = ("", 7000)
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server.bind(addr)
