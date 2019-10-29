@@ -44,6 +44,7 @@ class Ui_Signup(object):
         self.password_field = QtWidgets.QLineEdit(self.centralwidget)
         self.password_field.setGeometry(QtCore.QRect(250, 240, 301, 21))
         self.password_field.setText("")
+        self.password_field.setEchoMode(QtWidgets.QLineEdit.Password)
         self.password_field.setObjectName("password_field")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(370, 210, 60, 16))
