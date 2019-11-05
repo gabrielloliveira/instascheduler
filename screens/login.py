@@ -11,9 +11,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import socket
 import pickle
 import struct
+from client.conexao import Ip
 
-addr = (('localhost', 7000))
-
+ip = Ip()
+addr = ip.addr_server
 class Ui_Login(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")

@@ -11,9 +11,10 @@ from client.session import Session
 from datetime import datetime
 import socket
 import pickle
+from client.conexao import Ip
 
-addr = (('localhost', 7000))
-
+ip = Ip()
+addr = ip.addr_server
 class Ui_Post_scheduler(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
