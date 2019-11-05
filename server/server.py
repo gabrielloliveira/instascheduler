@@ -8,6 +8,32 @@ import os
 
 # con, cliente = serv_socket.accept()
 
+def send_api(received, img_path):
+    import requests
+    import json
+
+    url = 'http://10.180.51.154:3000/api/'
+
+    files = {
+        'img': open(img_path, 'rb'),
+    }
+
+    parms = {
+        'subtitle': received['subtitle'],
+        'location': 'ufpi',
+        'filtro': 'maven',
+        'user': received['instagram']
+    }
+
+    response = requests.post(url, data=parms, files=files)
+    response = json.loads(response.status_code)
+
+    if response['status'] == 'ok':
+        return 'success'
+    else:
+        return 'Não foi possível cadastrar a imagem.'
+
+
 def login(received):
     email = received['email']
     password = received['password']
@@ -53,6 +79,9 @@ def schedule_posting(received):
         with open((img_path), 'wb') as f:
             f.write(binary_image)
             f.close()
+
+        return send_api(received, img_path)
+
     return result
     
 class ClientThread(threading.Thread):
