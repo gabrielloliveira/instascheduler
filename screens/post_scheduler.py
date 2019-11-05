@@ -181,6 +181,11 @@ class Ui_Post_scheduler(object):
         subtitle = self.subtitle_field.toPlainText()
         instagram = self.instagram_field.text()
         date_str = self.date_scheduler_field.text()  
+        _translate = QtCore.QCoreApplication.translate
+        self.instagram_field.setText(_translate("MainWindow", "@"))
+        self.subtitle_field.setText(_translate("MainWindow", ""))
+
+
         try:
             date = datetime.strptime(date_str, "%d/%m/%y %H:%M") 
         except :

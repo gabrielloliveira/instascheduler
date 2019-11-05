@@ -98,6 +98,7 @@ class Ui_Add_insta(object):
         self.password_field = QtWidgets.QLineEdit(self.centralwidget)
         self.password_field.setGeometry(QtCore.QRect(223, 176, 421, 24))
         self.password_field.setText("")
+        self.password_field.setEchoMode(QtWidgets.QLineEdit.Password)
         self.password_field.setObjectName("password_field")
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(100, 176, 86, 22))
@@ -148,6 +149,10 @@ class Ui_Add_insta(object):
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         username = self.username_field.text()   
         password = self.password_field.text()
+
+        _translate = QtCore.QCoreApplication.translate
+        self.username_field.setText(_translate("MainWindow", "@"))
+        self.password_field.setText(_translate("MainWindow", ""))
 
         # try:
         client_socket.connect(addr)

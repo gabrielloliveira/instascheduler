@@ -101,9 +101,12 @@ class Ui_Signup(object):
         self.link_login.setText(_translate("MainWindow", "Já tem uma conta? Faça login"))
 
     def signup(self):
+        _translate = QtCore.QCoreApplication.translate
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         email = self.email_field.text()
         password = self.password_field.text()
+        self.email_field.setText(_translate("MainWindow", ""))
+        self.password_field.setText(_translate("MainWindow", ""))
 
         client_socket.connect(addr)
         
