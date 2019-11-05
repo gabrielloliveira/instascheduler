@@ -42,11 +42,11 @@ class Connector():
                 SELECT * FROM user WHERE email=?
                 """, (email,))
                 stored_password = self.return_password(result.fetchall())
-
                 if stored_password is not None and verify_password(stored_password, password):
-                    return True
+                    return "success"
 
-            return None
+                return "Cliente não encontrado"
+            return "Não foi possivel estabeler uma conexão com o servidor"
 
         finally:
             self._conn.close()
@@ -69,9 +69,10 @@ class Connector():
 
                     self._conn.commit()
 
-                    return True
+                    return 'success'
 
-            return None
+                return "Esse email já existe"
+            return "Não foi possivel estabeler uma conexão com o servidor"
 
         finally:
             self._conn.close()
@@ -100,9 +101,10 @@ class Connector():
 
                     self._conn.commit()
 
-                    return True
+                    return 'success'
 
-            return None
+                return "Esse usuário já foi cadastrado"
+            return "Não foi possível estabeler uma conexão com o servidor"
 
         finally:
             self._conn.close()
@@ -119,7 +121,7 @@ class Connector():
                 user = user.fetchone()
 
                 if user is None:
-                    return None
+                    return "Não é possível realizar cadastro. Realize login com uma conta ativa"
                 
                 instagram = self._cursor.execute("""
                 SELECT * FROM instagram WHERE username=? and user=?
@@ -128,7 +130,7 @@ class Connector():
                 instagram = instagram.fetchone()
 
                 if instagram is None:
-                    return None
+                    return "Impossível encontrar Instagram informado"
 
                 date_now = str(datetime.now())
 
@@ -139,9 +141,9 @@ class Connector():
 
                 self._conn.commit()
 
-                return True
+                return "success"
 
-            return None
+            return "Não foi possivel estabeler uma conexão com o servidor"
 
         finally:
             self._conn.close()

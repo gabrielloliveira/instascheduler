@@ -120,11 +120,8 @@ class Ui_Login(object):
             response = pickle.loads(client_socket.recv(6144))
             client_socket.close()
             print(response)
-            res = 1
-            if response['status'] != 'success':
-                res = 0
 
-            return res
+            return response['status']
 
         # except:
         #     return 0

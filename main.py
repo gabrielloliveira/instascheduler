@@ -76,14 +76,14 @@ class Main(QMainWindow, Ui_Main):
     def login(self):
         try:
             response = self.screen_login.login()
-            if response:
+            if response == "success":
                 session = Session(self.screen_login.email_field.text())
                 session.set_data(self.screen_login.email_field.text())
                 self.QtStack.setCurrentIndex(2)
             else:
-                QtWidgets.QMessageBox.about(None, "Login", "Cliente não encontrado")
+                QtWidgets.QMessageBox.about(None, "Login", response)
         except:
-            QtWidgets.QMessageBox.about(None, "Login", "Cliente não encontrado")
+            QtWidgets.QMessageBox.about(None, "Login", "Não foi possivel estabeler uma conexão com o servidor")
 
     def screensLogin(self):
         self.QtStack.setCurrentIndex(0)
@@ -91,23 +91,23 @@ class Main(QMainWindow, Ui_Main):
     def add_user(self):
         try:
             response = self.screen_signup.signup()
-            if response:
+            if response == "success":
                 self.QtStack.setCurrentIndex(0)
             else:
-                QtWidgets.QMessageBox.about(None, "Cadastro", "Não foi possível fazer o cadastro!")
+                QtWidgets.QMessageBox.about(None, "Cadastro", response)
         except:
-            QtWidgets.QMessageBox.about(None, "Cadastro", "Não foi possível fazer o cadastro!")
+            QtWidgets.QMessageBox.about(None, "Cadastro", "Não foi possivel estabeler uma conexão com o servidor")
 
     def add_insta_clicked(self):
         try:
             response = self.screen_add_insta.add()
-            if response:
+            if response == "success":
                 QtWidgets.QMessageBox.about(None, "Adicionar Instagram", "Instagram gravado com sucesso!")
                 self.QtStack.setCurrentIndex(2)
             else:
-                QtWidgets.QMessageBox.about(None, "Adicionar Instagram", "Não foi possível adicionar o instagram!")
+                QtWidgets.QMessageBox.about(None, "Adicionar Instagram", response)
         except:
-            QtWidgets.QMessageBox.about(None, "Adicionar Instagram", "Não foi possível adicionar o instagram!")
+            QtWidgets.QMessageBox.about(None, "Adicionar Instagram", "Não foi possivel estabeler uma conexão com o servidor")
     
     def signup(self):
         self.QtStack.setCurrentIndex(1) 
@@ -139,13 +139,13 @@ class Main(QMainWindow, Ui_Main):
     def scheduler(self):
         response = self.screen_post_scheduler.add(self.upload_path)
         try:
-            if response:
+            if response == "success":
                 QtWidgets.QMessageBox.about(None, "Agendar Postagem", "Agendamento gravada com sucesso!")
                 self.QtStack.setCurrentIndex(2)
             else:
-                QtWidgets.QMessageBox.about(None, "Agendar Postagem", "Não foi possível Agendar a postagem!")
+                QtWidgets.QMessageBox.about(None, "Agendar Postagem", response)
         except:
-            QtWidgets.QMessageBox.about(None, "Agendar Postagem", "1Não foi possível Agendar a postagem!")
+            QtWidgets.QMessageBox.about(None, "Agendar Postagem", "Não foi possivel estabeler uma conexão com o servidor")
 
 
 if __name__ == '__main__':

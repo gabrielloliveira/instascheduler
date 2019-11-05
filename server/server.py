@@ -79,7 +79,7 @@ class ClientThread(threading.Thread):
         func = received['func']
         result = eval(f'{func}')(received)
         message = {
-            'status': 'success' if result is not None else 'error'
+            'status': result
         }
         print(message)
         self.csocket.send(pickle.dumps(message))
