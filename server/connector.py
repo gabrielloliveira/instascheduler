@@ -12,7 +12,7 @@ class Connector():
             BASE_DIR = os.path.dirname(os.path.abspath(__file__))
             db_path = os.path.join(BASE_DIR, "db.sqlite3")
             
-            Connector.connection = sqlite3.connect(db_path)
+            Connector.connection = sqlite3.connect(db_path, timeout=10)
             Connector.__instance._conn = Connector.connection
             Connector.__instance._cursor = Connector.__instance._conn.cursor()
 
@@ -25,7 +25,7 @@ class Connector():
         self._db_path = os.path.join(BASE_DIR, "db.sqlite3")
 
     def connect_db(self):
-        self._conn = sqlite3.connect(self._db_path)
+        self._conn = sqlite3.connect(self._db_path, timeout=10)
         self._cursor = self._conn.cursor()
 
     def return_password(self, data):
@@ -43,10 +43,26 @@ class Connector():
                 """, (email,))
                 stored_password = self.return_password(result.fetchall())
                 if stored_password is not None and verify_password(stored_password, password):
-                    return "success"
+                    data = {
+                        'status': 'ok',
+                        'message': "success",
+                    }
 
-                return "Cliente não encontrado"
-            return "Não foi possivel estabeler uma conexão com o servidor"
+                    return data
+
+                data = {
+                    'status': None,
+                    'message': "Cliente não encontrado",
+                }
+
+                return data
+            
+            data = {
+                'status': None,
+                'message': "Não foi possível estabelecer uma conexão com o servidor",
+            }
+
+            return data
 
         finally:
             self._conn.close()
@@ -65,14 +81,32 @@ class Connector():
 
                     self._cursor.execute("""
                     INSERT INTO user (email, password) values (?, ?)
-                    """, (email, new_password))
+                    """, (email, new_password,))
 
                     self._conn.commit()
 
-                    return 'success'
+                    data = {
+                        'status': 'ok',
+                        'message': "success",
+                    }
 
-                return "Esse email já existe"
-            return "Não foi possivel estabeler uma conexão com o servidor"
+                    return data
+
+
+                data = {
+                    'status': None,
+                    'message': "Esse email já existe.",
+                }
+
+                return data
+
+            data = {
+                'status': None,
+                'message': "Não foi possível estabelecer uma conexão com o servidor",
+            }
+
+            return data
+
 
         finally:
             self._conn.close()
@@ -82,6 +116,7 @@ class Connector():
 
         try:
             with self._conn:
+
                 instagram = self._cursor.execute("""
                 SELECT * FROM instagram WHERE username=?
                 """, (username,))
@@ -89,7 +124,7 @@ class Connector():
                 instagram = instagram.fetchall()
 
                 user = self._cursor.execute("""
-                SELECT * FROM user where email=?
+                SELECT * FROM user WHERE email=?
                 """, (email,))
 
                 user = user.fetchone()
@@ -97,14 +132,31 @@ class Connector():
                 if not instagram and user is not None:
                     self._cursor.execute("""
                     INSERT INTO instagram (username, password, user) values (?, ?, ?)
-                    """, (username, password, user[0]))
+                    """, (username, password, user[0],))
 
                     self._conn.commit()
 
-                    return 'success'
+                    data = {
+                        'status': 'ok',
+                        'message': "success",
+                    }
 
-                return "Esse usuário já foi cadastrado"
-            return "Não foi possível estabeler uma conexão com o servidor"
+                    return data
+
+
+                data = {
+                    'status': None,
+                    'message': "Esse usuário já foi cadastrado",
+                }
+
+                return data
+
+            data = {
+                'status': None,
+                'message': "Não foi possível estabeler uma conexão com o servidor",
+            }
+
+            return data
 
         finally:
             self._conn.close()
@@ -121,29 +173,46 @@ class Connector():
                 user = user.fetchone()
 
                 if user is None:
-                    return "Não é possível realizar cadastro. Realize login com uma conta ativa"
+                    data = {
+                        'status': None,
+                        'message': "Não é possível realizar cadastro. Realize login com uma conta ativa",
+                    }
+                    return data
                 
                 instagram = self._cursor.execute("""
                 SELECT * FROM instagram WHERE username=? and user=?
-                """, (username, user[0]))
+                """, (username, user[0],))
                 
                 instagram = instagram.fetchone()
 
                 if instagram is None:
-                    return "Impossível encontrar Instagram informado"
+                    data = {
+                        'status': None,
+                        'message': "Impossível encontrar Instagram informado",
+                    }
+                    return data
 
                 date_now = str(datetime.now())
 
                 self._cursor.execute("""
                 INSERT INTO scheduler (image, subtitle, location, account, created, date_scheduler) 
                 values (?, ?, ?, ?, ?, ?)
-                """, (img_path, subtitle, location, instagram[0], date_now, date))
+                """, (img_path, subtitle, location, instagram[0], date_now, date,))
 
                 self._conn.commit()
 
-                return "success"
+                
+                data = {
+                    'status': 'ok',
+                    'message': "sucess",
+                }
+                return data
 
-            return "Não foi possivel estabeler uma conexão com o servidor"
+            data = {
+                'status': 'ok',
+                'message': "Não foi possivel estabeler uma conexão com o servidores",
+            }
+            return data
 
         finally:
             self._conn.close()

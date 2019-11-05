@@ -147,6 +147,8 @@ class Ui_Add_insta(object):
 
     def add(self):
         session = Session('name')
+
+        print("===== cliente", session.user)
         
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         username = self.username_field.text()   

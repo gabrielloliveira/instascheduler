@@ -38,14 +38,14 @@ def login(received):
     password = received['password']
     conn = Connector()
     result = conn.search_user(email, password)
-    return result
+    return result['message']
 
 def signup(received):
     email = received['email']
     password = received['password']
     conn = Connector()
     result = conn.add_user(email, password)
-    return result
+    return result['message']
 
 def add_insta(received):
     username = received['username']
@@ -53,7 +53,7 @@ def add_insta(received):
     user = received['user']
     conn = Connector()
     result = conn.add_insta(username, password, user)
-    return result
+    return result['message']
 
 
 def schedule_posting(received):
@@ -73,7 +73,7 @@ def schedule_posting(received):
 
     conn = Connector()
     result = conn.add_schedule(img_path, subtitle, location, instagram, date, user)
-    if result != None:
+    if result['status'] != None:
         # Salvando a imagem na pasta upload com o nome padrão : yyyy-mm-dd-email-name.jpeg
         with open((img_path), 'wb') as f:
             f.write(binary_image)
@@ -81,7 +81,7 @@ def schedule_posting(received):
 
         return send_api(received, img_path)
 
-    return result
+    return result['message']
     
 class ClientThread(threading.Thread):
     def __init__(self,clientAddress,clientsocket):

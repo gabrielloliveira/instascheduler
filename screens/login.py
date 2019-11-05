@@ -12,6 +12,7 @@ import socket
 import pickle
 import struct
 from client.connection import Ip
+from client.session import Session
 
 ip = Ip()
 addr = ip.addr_server
@@ -105,6 +106,8 @@ class Ui_Login(object):
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         email = self.email_field.text()
         password = self.password_field.text()
+        session = Session(email)
+        session.set_data(email)
         self.email_field.setText(_translate("MainWindow", ""))
         self.password_field.setText(_translate("MainWindow", ""))
         # try:

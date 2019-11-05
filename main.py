@@ -77,8 +77,6 @@ class Main(QMainWindow, Ui_Main):
         try:
             response = self.screen_login.login()
             if response == "success":
-                session = Session(self.screen_login.email_field.text())
-                session.set_data(self.screen_login.email_field.text())
                 self.QtStack.setCurrentIndex(2)
             else:
                 QtWidgets.QMessageBox.about(None, "Login", response)
