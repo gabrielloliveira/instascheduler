@@ -202,9 +202,13 @@ class Ui_Post_scheduler(object):
         
         client_socket.connect(addr)
 
-        with open(path, 'rb') as arq:
-            binary_image = arq.read()
-            arq.close()
+        try:
+            with open(path, 'rb') as arq:
+                binary_image = arq.read()
+                arq.close()
+        except :
+            return "Imagem inválida"
+
         
         img = path.split('/')[-1]
         message = {
