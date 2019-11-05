@@ -181,7 +181,9 @@ class Ui_Post_scheduler(object):
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         subtitle = self.subtitle_field.toPlainText()
         instagram = self.instagram_field.text()
-        date_str = self.date_scheduler_field.text()  
+        date_str = self.date_scheduler_field.text() 
+        location =  self.location_checkBox.isChecked()
+
         _translate = QtCore.QCoreApplication.translate
         self.instagram_field.setText(_translate("MainWindow", "@"))
         self.subtitle_field.setText(_translate("MainWindow", ""))
@@ -191,6 +193,12 @@ class Ui_Post_scheduler(object):
             date = datetime.strptime(date_str, "%d/%m/%y %H:%M") 
         except :
             date = datetime.strptime(date_str, "%d/%m/%Y %H:%M") 
+        
+        if location == True:
+            location = "Picos"
+        else:
+            location = ""
+
         
         client_socket.connect(addr)
 
@@ -204,7 +212,7 @@ class Ui_Post_scheduler(object):
             'img': img,
             'binary_image': binary_image,
             'subtitle': subtitle,
-            'location': 'location',
+            'location': location,
             'instagram': instagram,
             'date': date,
             'user': session.user,
