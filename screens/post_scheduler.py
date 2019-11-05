@@ -11,7 +11,7 @@ from client.session import Session
 from datetime import datetime
 import socket
 import pickle
-from client.conexao import Ip
+from client.connection import Ip
 
 ip = Ip()
 addr = ip.addr_server

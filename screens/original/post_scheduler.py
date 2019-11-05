@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'add_insta.ui'
+# Form implementation generated from reading ui file 'post_scheduler.ui'
 #
 # Created by: PyQt5 UI code generator 5.9.2
 #
@@ -8,15 +8,14 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from client.session import Session
+from datetime import datetime
 import socket
 import pickle
-import struct
-from client.connection import Ip
+from client.conexao import Ip
 
 ip = Ip()
 addr = ip.addr_server
-
-class Ui_Add_insta(object):
+class Ui_Post_scheduler(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 500)
@@ -34,14 +33,19 @@ class Ui_Add_insta(object):
 "")
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
-        self.add_button = QtWidgets.QPushButton(self.centralwidget)
-        self.add_button.setGeometry(QtCore.QRect(260, 400, 301, 32))
-        self.add_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.add_button.setStyleSheet("background-color: #3897f0;\n"
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(101, 151, 76, 22))
+        self.label_3.setStyleSheet("font-size: 18px;\n"
+"color: #404244;")
+        self.label_3.setObjectName("label_3")
+        self.scheduler_button = QtWidgets.QPushButton(self.centralwidget)
+        self.scheduler_button.setGeometry(QtCore.QRect(260, 400, 301, 32))
+        self.scheduler_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.scheduler_button.setStyleSheet("background-color: #3897f0;\n"
 "color: white;\n"
 "border-color: #3897f0;\n"
 "border-radius: 16px;")
-        self.add_button.setObjectName("add_button")
+        self.scheduler_button.setObjectName("scheduler_button")
         self.columnView_2 = QtWidgets.QColumnView(self.centralwidget)
         self.columnView_2.setGeometry(QtCore.QRect(30, 20, 741, 421))
         self.columnView_2.setStyleSheet("background-color: white;\n"
@@ -67,15 +71,43 @@ class Ui_Add_insta(object):
 "width: 200px;")
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout.addWidget(self.pushButton_2)
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(101, 101, 42, 22))
+        self.label_4.setStyleSheet("font-size: 18px;\n"
+"color: #404244;")
+        self.label_4.setObjectName("label_4")
+        self.button_upload = QtWidgets.QPushButton(self.centralwidget)
+        self.button_upload.setGeometry(QtCore.QRect(224, 101, 421, 36))
+        self.button_upload.setStyleSheet("background-color:#8334ac ;\n"
+"color: white;\n"
+"border-color: #8334ac;\n"
+"border-radius: 16px;\n"
+"padding: 10px;")
+        self.button_upload.setObjectName("button_upload")
+        self.subtitle_field = QtWidgets.QTextEdit(self.centralwidget)
+        self.subtitle_field.setGeometry(QtCore.QRect(224, 151, 421, 140))
+        self.subtitle_field.setObjectName("subtitle_field")
+        self.location_checkBox = QtWidgets.QCheckBox(self.centralwidget)
+        self.location_checkBox.setGeometry(QtCore.QRect(222, 298, 179, 20))
+        self.location_checkBox.setObjectName("location_checkBox")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(101, 140, 86, 22))
+        self.label_5.setGeometry(QtCore.QRect(101, 324, 86, 22))
         self.label_5.setStyleSheet("font-size: 18px;\n"
 "color: #404244;")
         self.label_5.setWordWrap(True)
         self.label_5.setObjectName("label_5")
-        self.username_field = QtWidgets.QLineEdit(self.centralwidget)
-        self.username_field.setGeometry(QtCore.QRect(224, 140, 421, 24))
-        self.username_field.setObjectName("username_field")
+        self.instagram_field = QtWidgets.QLineEdit(self.centralwidget)
+        self.instagram_field.setGeometry(QtCore.QRect(224, 324, 421, 24))
+        self.instagram_field.setObjectName("instagram_field")
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(101, 356, 109, 22))
+        self.label_6.setStyleSheet("font-size: 18px;\n"
+"color: #404244;")
+        self.label_6.setWordWrap(True)
+        self.label_6.setObjectName("label_6")
+        self.date_scheduler_field = QtWidgets.QDateTimeEdit(self.centralwidget)
+        self.date_scheduler_field.setGeometry(QtCore.QRect(224, 356, 421, 24))
+        self.date_scheduler_field.setObjectName("date_scheduler_field")
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setGeometry(QtCore.QRect(30, 80, 741, 31))
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
@@ -97,29 +129,23 @@ class Ui_Add_insta(object):
 "border-color: #ff3860;\n"
 "border-radius: 14px;")
         self.logout_button.setObjectName("logout_button")
-        self.password_field = QtWidgets.QLineEdit(self.centralwidget)
-        self.password_field.setGeometry(QtCore.QRect(223, 176, 421, 24))
-        self.password_field.setText("")
-        self.password_field.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.password_field.setObjectName("password_field")
-        self.label_6 = QtWidgets.QLabel(self.centralwidget)
-        self.label_6.setGeometry(QtCore.QRect(100, 176, 86, 22))
-        self.label_6.setStyleSheet("font-size: 18px;\n"
-"color: #404244;")
-        self.label_6.setWordWrap(True)
-        self.label_6.setObjectName("label_6")
         self.layoutWidget.raise_()
         self.columnView.raise_()
         self.columnView_2.raise_()
         self.label.raise_()
-        self.add_button.raise_()
+        self.label_3.raise_()
+        self.scheduler_button.raise_()
+        self.label_4.raise_()
+        self.button_upload.raise_()
+        self.subtitle_field.raise_()
+        self.location_checkBox.raise_()
         self.label_5.raise_()
-        self.username_field.raise_()
+        self.instagram_field.raise_()
+        self.label_6.raise_()
+        self.date_scheduler_field.raise_()
         self.line.raise_()
         self.home_button.raise_()
         self.logout_button.raise_()
-        self.password_field.raise_()
-        self.label_6.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
@@ -135,34 +161,64 @@ class Ui_Add_insta(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "Adicionar Conta"))
-        self.add_button.setText(_translate("MainWindow", "Adicionar"))
+        self.label.setText(_translate("MainWindow", "Agendar Publicação"))
+        self.label_3.setText(_translate("MainWindow", "Legenda:"))
+        self.scheduler_button.setText(_translate("MainWindow", "Agendar"))
         self.label_2.setText(_translate("MainWindow", "Foto:"))
         self.pushButton_2.setText(_translate("MainWindow", "Upload"))
+        self.label_4.setText(_translate("MainWindow", "Foto:"))
+        self.button_upload.setText(_translate("MainWindow", "Upload"))
+        self.location_checkBox.setText(_translate("MainWindow", "Compartilhar Lozalização"))
         self.label_5.setText(_translate("MainWindow", "Instagram:"))
-        self.username_field.setText(_translate("MainWindow", "@"))
+        self.instagram_field.setText(_translate("MainWindow", "@"))
+        self.label_6.setText(_translate("MainWindow", "Data do post:"))
         self.home_button.setText(_translate("MainWindow", "Voltar"))
         self.logout_button.setText(_translate("MainWindow", "Sair"))
-        self.label_6.setText(_translate("MainWindow", "Senha"))
 
-    def add(self):
+    def add(self, path):
         session = Session('name')
         
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        username = self.username_field.text()   
-        password = self.password_field.text()
+        subtitle = self.subtitle_field.toPlainText()
+        instagram = self.instagram_field.text()
+        date_str = self.date_scheduler_field.text() 
+        location =  self.location_checkBox.isChecked()
 
         _translate = QtCore.QCoreApplication.translate
-        self.username_field.setText(_translate("MainWindow", "@"))
-        self.password_field.setText(_translate("MainWindow", ""))
+        self.instagram_field.setText(_translate("MainWindow", "@"))
+        self.subtitle_field.setText(_translate("MainWindow", ""))
 
-        # try:
-        client_socket.connect(addr)
+
+        try:
+            date = datetime.strptime(date_str, "%d/%m/%y %H:%M") 
+        except :
+            date = datetime.strptime(date_str, "%d/%m/%Y %H:%M") 
         
+        if location == True:
+            location = "Picos"
+        else:
+            location = ""
+
+        
+        client_socket.connect(addr)
+
+        try:
+            with open(path, 'rb') as arq:
+                binary_image = arq.read()
+                arq.close()
+        except :
+            return "Imagem inválida"
+
+        
+        img = path.split('/')[-1]
         message = {
-            'func': 'add_insta',
-            'username': username,
-            'password': password,
+            'func': 'schedule_posting',
+            'img': img,
+            'binary_image': binary_image,
+            'subtitle': subtitle,
+            'location': location,
+            'instagram': instagram,
+            'date': date,
             'user': session.user,
         }
         
@@ -173,7 +229,6 @@ class Ui_Add_insta(object):
             print(response)
 
             return response['status']  
-
 
 if __name__ == "__main__":
     import sys

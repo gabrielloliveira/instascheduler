@@ -6,3 +6,4 @@ class Ip:
     @property
     def addr_server(self):
         return self._addr_server
+    

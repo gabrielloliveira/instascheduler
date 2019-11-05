@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import socket
 import pickle
 import struct
-from client.conexao import Ip
+from client.connection import Ip
 
 ip = Ip()
 addr = ip.addr_server

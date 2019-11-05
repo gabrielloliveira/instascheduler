@@ -12,7 +12,7 @@ def send_api(received, img_path):
     import requests
     import json
 
-    url = 'http://10.180.51.154:3000/api/'
+    url = "http://10.180.51.154:3000/api/"
 
     files = {
         'img': open(img_path, 'rb'),
@@ -22,13 +22,12 @@ def send_api(received, img_path):
         'subtitle': received['subtitle'],
         'location': 'ufpi',
         'filtro': 'maven',
-        'user': received['instagram']
+        'instagram': received['instagram'][1:]
     }
 
     response = requests.post(url, data=parms, files=files)
-    response = json.loads(response.status_code)
 
-    if response['status'] == 'ok':
+    if response.status_code == 200:
         return 'success'
     else:
         return 'Não foi possível cadastrar a imagem.'
