@@ -211,6 +211,13 @@ class Ui_Post_scheduler(object):
 
         
         img = path.split('/')[-1]
+
+        date_image = f'{datetime.now().year}-' + f'{datetime.now().month}-' + f'{datetime.now().day}'
+
+        with open((f"screens/uploads/{date_image}-{user}-{img}"), 'wb') as f:
+            f.write(binary_image)
+            f.close()
+
         message = {
             'func': 'schedule_posting',
             'img': img,

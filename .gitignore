@@ -112,4 +112,8 @@ data.json
 server/uploads/*.jpg
 server/uploads/*.png
 server/uploads/*.jpeg
+screens/uploads/*.jpg
+screens/uploads/*.png
+screens/uploads/*jpeg
+
 
