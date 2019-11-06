@@ -4,6 +4,8 @@ import socket, threading
 import socket
 import pickle
 import os
+import time
+from datetime import datetime
 
 
 # con, cliente = serv_socket.accept()
@@ -12,7 +14,7 @@ def send_api(received, img_path):
     import requests
     import json
 
-    url = "http://10.180.51.154:3000/api/"
+    url = "http://localhost:3000/api/"
 
     files = {
         'img': open(img_path, 'rb'),
@@ -32,6 +34,41 @@ def send_api(received, img_path):
     else:
         return 'Não foi possível cadastrar a imagem.'
 
+def thread_function1(received):
+    # pass
+    mydatetime = datetime.strptime(received[-1], "%Y-%m-%d %H:%M:%S")
+    string = str((mydatetime-datetime.now()).total_seconds())
+    seg = string.split('.')[0]
+    print("to esperando aqui")
+    time.sleep(int(seg))
+    print("Fui")
+    conn = Connector()
+    insta = conn.instagram( received[-3])
+    dicionario = { 
+        'subtitle': received[0],
+        'instagram': insta[0][1]
+    }
+    path = received[1]
+    send_api(dicionario, (path))
+
+
+def scheduler():
+    conn = Connector()
+    schedulerListReturn = conn.scheduler()
+    schedulerList = []
+
+    # print(schedulerList)
+    for i in schedulerListReturn:
+        lista = i[-1]
+
+    mydatetime = datetime.strptime(lista, "%Y-%m-%d %H:%M:%S")
+
+    if mydatetime > datetime.now():
+        x = threading.Thread(target=thread_function1, args=(schedulerListReturn[-1],))
+        x.start()
+        return "success"
+    return 'Horario invalido'
+    
 
 def login(received):
     email = received['email']
@@ -70,6 +107,8 @@ def schedule_posting(received):
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     img_path = os.path.join(BASE_DIR, f"uploads/{date_image}-{user}-{img}")
 
+    if date < datetime.now():
+        return 'Horario invalido'
 
     conn = Connector()
     result = conn.add_schedule(img_path, subtitle, location, instagram, date, user)
@@ -78,8 +117,10 @@ def schedule_posting(received):
         with open((img_path), 'wb') as f:
             f.write(binary_image)
             f.close()
-
-        return send_api(received, img_path)
+        scheduler()
+        time.sleep(1)
+        return 'success'
+        # return send_api(received, img_path)
 
     return result['message']
     

@@ -216,6 +216,30 @@ class Connector():
 
         finally:
             self._conn.close()
+   
+    def scheduler(self):
+        self.connect_db()
+
+        try:
+            with self._conn:
+                result = self._cursor.execute("""SELECT * FROM scheduler """)
+            return result.fetchall()
+
+        finally:
+            self._conn.close()
+
+    def instagram(self, id1):
+        self.connect_db()
+
+        try:
+            with self._conn:
+                result = self._cursor.execute("""
+                SELECT * FROM instagram WHERE id=?
+                """, (id1,))
+            return result.fetchall()
+
+        finally:
+            self._conn.close()
 
     def close(self):
         self._conn.close()
