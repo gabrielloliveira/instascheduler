@@ -46,7 +46,7 @@ def thread_function1(received):
     insta = conn.instagram( received[-3])
     dicionario = { 
         'subtitle': received[2],
-        'instagram': insta[0][1]
+        'instagram': insta[1]
     }
     path = received[1]
     send_api(dicionario, (path))

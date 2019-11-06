@@ -236,7 +236,7 @@ class Connector():
                 result = self._cursor.execute("""
                 SELECT * FROM instagram WHERE id=?
                 """, (id1,))
-            return result.fetchall()
+            return result.fetchone()
 
         finally:
             self._conn.close()
