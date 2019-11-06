@@ -45,7 +45,7 @@ def thread_function1(received):
     conn = Connector()
     insta = conn.instagram( received[-3])
     dicionario = { 
-        'subtitle': received[0],
+        'subtitle': received[2],
         'instagram': insta[0][1]
     }
     path = received[1]
