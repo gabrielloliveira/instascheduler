@@ -11,6 +11,13 @@ import sys
 import os
 from PyQt5.QtCore import pyqtSlot
 from client.session import Session
+import socket
+import pickle
+import struct
+from client.connection import Ip
+
+ip = Ip()
+addr = ip.addr_server
 
 class Ui_Main(QtWidgets.QWidget):
     def setupUi(self, Main):
@@ -74,13 +81,50 @@ class Main(QMainWindow, Ui_Main):
         self.screen_post_scheduler.scheduler_button.clicked.connect(self.scheduler)
 
     def setimage(self):
-        # filename = QtWidgets.QFileDialog.getOpenFileName(self, 'insert image', r'/home/lucas/Arquivos/Documents/Poo2/instaScheduler/instascheduler/screens/static/img','image (*.jpg *.png *.icon *.gif)')
+        """Function that takes the user's last two scheduled photos and adds them 
+        to the home screen.
+        """
+        
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        session = Session('name')
+        client_socket.connect(addr)
+
+        message = {
+            'func': 'get_last_two_schedules',
+            'email': session.user,
+        }
+        
+        client_socket.send(pickle.dumps(message))
+
+        data = b''
+        
+        while True:
+            packet = client_socket.recv(6144) 
+            data += packet
+            try:
+                received = pickle.loads(data)
+                break
+            except:
+                pass
+                
+        received = pickle.loads(data)
+
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-        filename = (f"{BASE_DIR}/screens/static/img/350x250.png",'image (*.jpg *.png *.icon *.gif)')
-        print("path is " + filename[0]+ " and I don't need " + filename[1])
-        pngfile = QPixmap(filename[0]) # We create the image as a QPixmap widget, using your filename.
-        self.screen_home.label_3.setPixmap(pngfile) # And then we add it like this.
-        self.screen_home.label_4.setPixmap(pngfile) # And then we add it like this.
+
+        with open((f'{BASE_DIR}/screens/static/img/image_1.png'), 'wb') as f:
+            f.write(received['status']['image_1'])
+            f.close()
+
+        with open((f'{BASE_DIR}/screens/static/img/image_2.png'), 'wb') as f:
+            f.write(received['status']['image_2'])
+            f.close()
+
+        filename1 = (f"{BASE_DIR}/screens/static/img/image_1.png",'image (*.jpg *.png *.icon *.gif)')
+        filename2 = (f"{BASE_DIR}/screens/static/img/image_2.png",'image (*.jpg *.png *.icon *.gif)')
+        pngfile1 = QPixmap(filename1[0]).scaledToWidth(350)
+        pngfile2 = QPixmap(filename2[0]).scaledToWidth(350)
+        self.screen_home.label_3.setPixmap(pngfile1)
+        self.screen_home.label_4.setPixmap(pngfile2)
 
     def login(self):
         try:
