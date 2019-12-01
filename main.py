@@ -75,7 +75,8 @@ class Main(QMainWindow, Ui_Main):
 
     def setimage(self):
         # filename = QtWidgets.QFileDialog.getOpenFileName(self, 'insert image', r'/home/lucas/Arquivos/Documents/Poo2/instaScheduler/instascheduler/screens/static/img','image (*.jpg *.png *.icon *.gif)')
-        filename = ("/home/lucas/Arquivos/Documents/Poo2/instaScheduler/instascheduler/screens/static/img/350x250.png",'image (*.jpg *.png *.icon *.gif)')
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        filename = (f"{BASE_DIR}/screens/static/img/350x250.png",'image (*.jpg *.png *.icon *.gif)')
         print("path is " + filename[0]+ " and I don't need " + filename[1])
         pngfile = QPixmap(filename[0]) # We create the image as a QPixmap widget, using your filename.
         self.screen_home.label_3.setPixmap(pngfile) # And then we add it like this.
@@ -85,7 +86,7 @@ class Main(QMainWindow, Ui_Main):
         try:
             response = self.screen_login.login()
             if response == "success":
-                self.QtStack.setCurrentIndex(2)
+                self.home()
             else:
                 QtWidgets.QMessageBox.about(None, "Login", response)
         except:
