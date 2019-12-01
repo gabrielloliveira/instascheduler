@@ -218,6 +218,11 @@ class Connector():
             self._conn.close()
    
     def scheduler(self):
+        """Function to get all scheduled posts.
+
+        Returns:
+            The function returns a list containing all schedules.
+        """
         self.connect_db()
 
         try:
@@ -229,6 +234,14 @@ class Connector():
             self._conn.close()
 
     def instagram(self, id1):
+        """Function to get instagram by id.
+
+        Args:
+            id1: The instagram id.
+
+        Returns:
+            The function returns a tuple as localized intagram.
+        """
         self.connect_db()
 
         try:
