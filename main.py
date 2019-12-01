@@ -64,14 +64,22 @@ class Main(QMainWindow, Ui_Main):
         self.screen_home.pushButton_4.clicked.connect(self.add_insta)
         self.screen_home.pushButton_3.clicked.connect(self.post_scheduler)
 
-        self.screen_add_insta.home_button.clicked.connect(self.come_back)
+        self.screen_add_insta.home_button.clicked.connect(self.home)
         self.screen_add_insta.logout_button.clicked.connect(self.logout)
         self.screen_add_insta.add_button.clicked.connect(self.add_insta_clicked)
 
-        self.screen_post_scheduler.home_button.clicked.connect(self.come_back)
+        self.screen_post_scheduler.home_button.clicked.connect(self.home)
         self.screen_post_scheduler.logout_button.clicked.connect(self.logout)
         self.screen_post_scheduler.button_upload.clicked.connect(self.upload)
         self.screen_post_scheduler.scheduler_button.clicked.connect(self.scheduler)
+
+    def setimage(self):
+        # filename = QtWidgets.QFileDialog.getOpenFileName(self, 'insert image', r'/home/lucas/Arquivos/Documents/Poo2/instaScheduler/instascheduler/screens/static/img','image (*.jpg *.png *.icon *.gif)')
+        filename = ("/home/lucas/Arquivos/Documents/Poo2/instaScheduler/instascheduler/screens/static/img/350x250.png",'image (*.jpg *.png *.icon *.gif)')
+        print("path is " + filename[0]+ " and I don't need " + filename[1])
+        pngfile = QPixmap(filename[0]) # We create the image as a QPixmap widget, using your filename.
+        self.screen_home.label_3.setPixmap(pngfile) # And then we add it like this.
+        self.screen_home.label_4.setPixmap(pngfile) # And then we add it like this.
 
     def login(self):
         try:
@@ -111,6 +119,7 @@ class Main(QMainWindow, Ui_Main):
         self.QtStack.setCurrentIndex(1) 
     
     def home(self):
+        self.setimage()
         self.QtStack.setCurrentIndex(2) 
 
     def logout(self):
