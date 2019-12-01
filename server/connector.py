@@ -241,5 +241,69 @@ class Connector():
         finally:
             self._conn.close()
 
+    def get_last_two_schedules(self, email):
+        """Function to get the last two schedules of a user.
+
+        Args:
+            email: The user's email.
+
+        Returns:
+            The function returns a dictionary which given the varying status the 
+            server will process if everything went as planned.
+        """
+        self.connect_db()
+
+        try:
+            with self._conn:
+                user = self._cursor.execute("""
+                SELECT * FROM user WHERE email=?
+                """, (email,))
+
+                user = user.fetchone()
+
+                if user is None:
+                    data = {
+                        'status': None,
+                        'message': "Usuário não existente.",
+                    }
+                    return data
+
+                instagrams = self._cursor.execute("""
+                SELECT * FROM instagram WHERE user=?
+                """, (user[0],))
+                
+                instagrams = instagrams.fetchall()
+
+                if not instagrams:
+                    data = {
+                        'status': None,
+                        'message': "O usuário não possui instagrams.",
+                    }
+                    return data
+
+                instagrams_id = [instagram[0] for instagram in instagrams]
+                instagrams_id = tuple(instagrams_id)
+                schedules = self._cursor.execute("""
+                SELECT * FROM scheduler WHERE account IN {} ORDER BY created DESC LIMIT 2
+                """.format(instagrams_id))
+
+                schedules = schedules.fetchall()
+
+                if not schedules:
+                    data = {
+                        'status': None,
+                        'message': "O usuário não possui agendamentos.",
+                    }
+                    return data
+
+                data = {
+                    'status': 'ok',
+                    'schedules': schedules,
+                }
+                return data
+
+        finally:
+            self._conn.close()
+
     def close(self):
         self._conn.close()
