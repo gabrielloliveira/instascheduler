@@ -1,10 +1,12 @@
 import sqlite3
 
-# conectando...
+"""Script to create database structure."""
+
+# connection...
 conn = sqlite3.connect('db.sqlite3')
 cursor = conn.cursor()
 
-# criando a tabela (user)
+# creating the user table
 cursor.execute("""
 CREATE TABLE user (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -14,7 +16,7 @@ CREATE TABLE user (
 """)
 print("Criando a tabela user ... OK")
 
-# criando a tabela (instagram)
+# creating the instagram table
 cursor.execute("""
 CREATE TABLE instagram (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -26,7 +28,7 @@ CREATE TABLE instagram (
 """)
 print("Criando a tabela instagram ... OK")
 
-# criando a tabela (scheduler)
+# creating the scheduler table
 cursor.execute("""
 CREATE TABLE scheduler (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -43,5 +45,5 @@ print("Criando a tabela scheduler ... OK")
 
 print('BD criado com sucesso.')
 
-# desconectando...
+# closing the database connection...
 conn.close()
