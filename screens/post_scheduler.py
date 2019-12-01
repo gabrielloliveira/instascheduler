@@ -96,7 +96,10 @@ class Ui_Post_scheduler(object):
 "color: #404244;")
         self.label_5.setWordWrap(True)
         self.label_5.setObjectName("label_5")
-        self.instagram_field = QtWidgets.QLineEdit(self.centralwidget)
+        # self.instagram_field = QtWidgets.QLineEdit(self.centralwidget)
+        # self.instagram_field.setGeometry(QtCore.QRect(224, 324, 421, 24))
+        # self.instagram_field.setObjectName("instagram_field")
+        self.instagram_field = QtWidgets.QComboBox(self.centralwidget)
         self.instagram_field.setGeometry(QtCore.QRect(224, 324, 421, 24))
         self.instagram_field.setObjectName("instagram_field")
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
@@ -170,7 +173,8 @@ class Ui_Post_scheduler(object):
         self.button_upload.setText(_translate("MainWindow", "Upload"))
         self.location_checkBox.setText(_translate("MainWindow", "Compartilhar Lozalização"))
         self.label_5.setText(_translate("MainWindow", "Instagram:"))
-        self.instagram_field.setText(_translate("MainWindow", "@"))
+        # self.instagram_field.setText(_translate("MainWindow", "@"))
+        self.instagram_field.addItem("@lucas") 
         self.label_6.setText(_translate("MainWindow", "Data do post:"))
         self.home_button.setText(_translate("MainWindow", "Voltar"))
         self.logout_button.setText(_translate("MainWindow", "Sair"))
@@ -180,12 +184,13 @@ class Ui_Post_scheduler(object):
         
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         subtitle = self.subtitle_field.toPlainText()
-        instagram = self.instagram_field.text()
+        # instagram = self.instagram_field.text()
+        instagram = self.instagram_field.currentText()
         date_str = self.date_scheduler_field.text() 
         location =  self.location_checkBox.isChecked()
 
         _translate = QtCore.QCoreApplication.translate
-        self.instagram_field.setText(_translate("MainWindow", "@"))
+        # self.instagram_field.setText(_translate("MainWindow", "@")) 
         self.subtitle_field.setText(_translate("MainWindow", ""))
 
 

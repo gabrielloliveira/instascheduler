@@ -98,7 +98,7 @@ class Main(QMainWindow, Ui_Main):
         try:
             response = self.screen_signup.signup()
             if response == "success":
-                self.QtStack.setCurrentIndex(0)
+                self.home()
             else:
                 QtWidgets.QMessageBox.about(None, "Cadastro", response)
         except:
@@ -109,7 +109,7 @@ class Main(QMainWindow, Ui_Main):
             response = self.screen_add_insta.add()
             if response == "success":
                 QtWidgets.QMessageBox.about(None, "Adicionar Instagram", "Instagram gravado com sucesso!")
-                self.QtStack.setCurrentIndex(2)
+                self.home()
             else:
                 QtWidgets.QMessageBox.about(None, "Adicionar Instagram", response)
         except:
