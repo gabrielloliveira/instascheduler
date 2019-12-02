@@ -116,12 +116,16 @@ class Main(QMainWindow, Ui_Main):
                 f.write(received['status']['image_1'])
                 f.close()
 
-            with open((f'{BASE_DIR}/screens/static/img/image_2.png'), 'wb') as f:
-                f.write(received['status']['image_2'])
-                f.close()
+
+            if received['status']['image_2']:
+                with open((f'{BASE_DIR}/screens/static/img/image_2.png'), 'wb') as f:
+                    f.write(received['status']['image_2'])
+                    f.close()
+                filename2 = (f"{BASE_DIR}/screens/static/img/image_2.png",'image (*.jpg *.png *.icon *.gif)')
+            else:
+                filename2 = (f"{BASE_DIR}/screens/static/img/350x250.png",'image (*.jpg *.png *.icon *.gif)')
 
             filename1 = (f"{BASE_DIR}/screens/static/img/image_1.png",'image (*.jpg *.png *.icon *.gif)')
-            filename2 = (f"{BASE_DIR}/screens/static/img/image_2.png",'image (*.jpg *.png *.icon *.gif)')
         else:
             filename1 = (f"{BASE_DIR}/screens/static/img/350x250.png",'image (*.jpg *.png *.icon *.gif)')
             filename2 = (f"{BASE_DIR}/screens/static/img/350x250.png",'image (*.jpg *.png *.icon *.gif)')
@@ -134,8 +138,6 @@ class Main(QMainWindow, Ui_Main):
     def login(self):
         try:
             response = self.screen_login.login()
-
-            print("====== response na funcao login = ", response)
 
             if response == "success" or response == "empty":
                 self.home()
