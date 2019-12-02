@@ -14,7 +14,7 @@ def send_api(received, img_path):
     import requests
     import json
 
-    url = "http://localhost:3000/api/"
+    url = "http://10.180.51.23:3000/api/"
 
     files = {
         'img': open(img_path, 'rb'),
@@ -142,9 +142,12 @@ def get_last_two_schedules(received):
             image_1 = arq.read()
             arq.close()
 
-        with open(result['schedules'][1][1], 'rb') as arq:
-            image_2 = arq.read()
-            arq.close()
+        try: 
+            with open(result['schedules'][1][1], 'rb') as arq:
+                image_2 = arq.read()
+                arq.close()
+        except:
+            pass
 
         data = {
             'status': "send_image",

@@ -315,9 +315,14 @@ class Connector():
 
                 instagrams_id = [instagram[0] for instagram in instagrams]
                 instagrams_id = tuple(instagrams_id)
-                schedules = self._cursor.execute("""
-                SELECT * FROM scheduler WHERE account IN {} ORDER BY created DESC LIMIT 2
-                """.format(instagrams_id))
+                if len(instagrams_id) > 1:
+                    schedules = self._cursor.execute("""
+                    SELECT * FROM scheduler WHERE account IN {} ORDER BY created DESC LIMIT 2
+                    """.format(instagrams_id))
+                else:
+                    schedules = self._cursor.execute("""
+                    SELECT * FROM scheduler WHERE account={} ORDER BY created DESC LIMIT 2
+                    """.format(instagrams_id[0]))
 
                 schedules = schedules.fetchall()
 
