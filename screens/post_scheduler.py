@@ -173,21 +173,39 @@ class Ui_Post_scheduler(object):
         self.button_upload.setText(_translate("MainWindow", "Upload"))
         self.location_checkBox.setText(_translate("MainWindow", "Compartilhar Lozalização"))
         self.label_5.setText(_translate("MainWindow", "Instagram:"))
-        # self.instagram_field.setText(_translate("MainWindow", "@"))
-        self.instagram_field.addItem("@lucas") 
         self.label_6.setText(_translate("MainWindow", "Data do post:"))
         self.home_button.setText(_translate("MainWindow", "Voltar"))
         self.logout_button.setText(_translate("MainWindow", "Sair"))
 
-    def add(self, path):
+    def updateinstagram_field(self):
         session = Session('name')
-        
+
+        message = {
+            'func': 'instagram_user',
+            'user': session.user,
+        }
+
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client_socket.connect(addr)
+        client_socket.send(pickle.dumps(message))
+        response = pickle.loads(client_socket.recv(6144))
+        client_socket.close()
+
+        instas = []
+        for i in response['status']:
+            instas.append(i[1])
+        self.instagram_field.clear() 
+        self.instagram_field.addItems(instas) 
+
+    def add(self, path):
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        session = Session('name')
         subtitle = self.subtitle_field.toPlainText()
         # instagram = self.instagram_field.text()
         instagram = self.instagram_field.currentText()
         date_str = self.date_scheduler_field.text() 
         location =  self.location_checkBox.isChecked()
+        print("eii:",instagram)
 
         _translate = QtCore.QCoreApplication.translate
         # self.instagram_field.setText(_translate("MainWindow", "@")) 

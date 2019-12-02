@@ -98,7 +98,7 @@ class Main(QMainWindow, Ui_Main):
         try:
             response = self.screen_signup.signup()
             if response == "success":
-                self.home()
+                self.screensLogin()
             else:
                 QtWidgets.QMessageBox.about(None, "Cadastro", response)
         except:
@@ -129,6 +129,7 @@ class Main(QMainWindow, Ui_Main):
         self.QtStack.setCurrentIndex(3) 
 
     def post_scheduler(self):
+        self.screen_post_scheduler.updateinstagram_field()
         self.QtStack.setCurrentIndex(4) 
 
     def come_back(self):
