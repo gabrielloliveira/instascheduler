@@ -204,7 +204,7 @@ class Main(QMainWindow, Ui_Main):
         try:
             if response == "success":
                 QtWidgets.QMessageBox.about(None, "Agendar Postagem", "Agendamento gravada com sucesso!")
-                self.QtStack.setCurrentIndex(2)
+                self.home()
             else:
                 QtWidgets.QMessageBox.about(None, "Agendar Postagem", response)
         except:
