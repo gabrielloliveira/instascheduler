@@ -14,7 +14,7 @@ def send_api(received, img_path):
     import requests
     import json
 
-    url = "http://192.168.0.105:3000/api/"
+    url = "http://localhost:3000/api/"
 
     files = {
         'img': open(img_path, 'rb'),
