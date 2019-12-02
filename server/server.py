@@ -14,7 +14,7 @@ def send_api(received, img_path):
     import requests
     import json
 
-    url = "http://10.180.51.154:3000/api/"
+    url = "http://192.168.0.105:3000/api/"
 
     files = {
         'img': open(img_path, 'rb'),
@@ -123,7 +123,13 @@ def schedule_posting(received):
         # return send_api(received, img_path)
 
     return result['message']
-    
+
+def instagram_user(received):
+    user = received['user']
+    conn = Connector()
+    result = conn.instagram_user(user)
+    return result
+
 class ClientThread(threading.Thread):
     def __init__(self,clientAddress,clientsocket):
         threading.Thread.__init__(self)

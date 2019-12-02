@@ -227,6 +227,25 @@ class Connector():
 
         finally:
             self._conn.close()
+            
+    def instagram_user(self, email):
+        self.connect_db()
+
+        try:
+            with self._conn:
+                user = self._cursor.execute("""
+                SELECT * FROM user where email=?
+                """, (email,))
+                # return (user.fetchone())
+
+                user = user.fetchone()
+                result = self._cursor.execute("""
+                SELECT * FROM instagram WHERE user=?
+                """, (user[0],))
+                return result.fetchall()
+        finally:
+            self._conn.close()
+ 
 
     def instagram(self, id1):
         self.connect_db()
