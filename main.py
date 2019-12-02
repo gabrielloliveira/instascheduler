@@ -93,7 +93,7 @@ class Main(QMainWindow, Ui_Main):
             'func': 'get_last_two_schedules',
             'email': session.user,
         }
-        
+
         client_socket.send(pickle.dumps(message))
 
         data = b''
@@ -106,21 +106,26 @@ class Main(QMainWindow, Ui_Main):
                 break
             except:
                 pass
-                
+    
         received = pickle.loads(data)
-
+        
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-        with open((f'{BASE_DIR}/screens/static/img/image_1.png'), 'wb') as f:
-            f.write(received['status']['image_1'])
-            f.close()
+        if received['status'] != 'empty':
+            with open((f'{BASE_DIR}/screens/static/img/image_1.png'), 'wb') as f:
+                f.write(received['status']['image_1'])
+                f.close()
 
-        with open((f'{BASE_DIR}/screens/static/img/image_2.png'), 'wb') as f:
-            f.write(received['status']['image_2'])
-            f.close()
+            with open((f'{BASE_DIR}/screens/static/img/image_2.png'), 'wb') as f:
+                f.write(received['status']['image_2'])
+                f.close()
 
-        filename1 = (f"{BASE_DIR}/screens/static/img/image_1.png",'image (*.jpg *.png *.icon *.gif)')
-        filename2 = (f"{BASE_DIR}/screens/static/img/image_2.png",'image (*.jpg *.png *.icon *.gif)')
+            filename1 = (f"{BASE_DIR}/screens/static/img/image_1.png",'image (*.jpg *.png *.icon *.gif)')
+            filename2 = (f"{BASE_DIR}/screens/static/img/image_2.png",'image (*.jpg *.png *.icon *.gif)')
+        else:
+            filename1 = (f"{BASE_DIR}/screens/static/img/350x250.png",'image (*.jpg *.png *.icon *.gif)')
+            filename2 = (f"{BASE_DIR}/screens/static/img/350x250.png",'image (*.jpg *.png *.icon *.gif)')
+
         pngfile1 = QPixmap(filename1[0]).scaledToWidth(350)
         pngfile2 = QPixmap(filename2[0]).scaledToWidth(350)
         self.screen_home.label_3.setPixmap(pngfile1)
@@ -129,7 +134,10 @@ class Main(QMainWindow, Ui_Main):
     def login(self):
         try:
             response = self.screen_login.login()
-            if response == "success":
+
+            print("====== response na funcao login = ", response)
+
+            if response == "success" or response == "empty":
                 self.home()
             else:
                 QtWidgets.QMessageBox.about(None, "Login", response)

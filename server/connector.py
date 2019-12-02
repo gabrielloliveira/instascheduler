@@ -308,7 +308,7 @@ class Connector():
 
                 if not instagrams:
                     data = {
-                        'status': None,
+                        'status': "empty",
                         'message': "O usuário não possui instagrams.",
                     }
                     return data
@@ -323,7 +323,7 @@ class Connector():
 
                 if not schedules:
                     data = {
-                        'status': None,
+                        'status': "empty",
                         'message': "O usuário não possui agendamentos.",
                     }
                     return data
