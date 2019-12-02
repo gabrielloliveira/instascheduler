@@ -125,35 +125,36 @@ def schedule_posting(received):
     return result['message']
 
 
+def get_last_two_schedules(received):
+    """Function to connect to the database and get the last two scheduled posts
+    from a user.
 
+    Args:
+        received: a dictionary containing the variables passed in the connection.
+    """
+    conn = Connector()
+    result = conn.get_last_two_schedules(received['email'])
+    if result['status'] != None:
+        image_1 = b''
+        image_2 = b''
 
+        with open(result['schedules'][0][1], 'rb') as arq:
+            image_1 = arq.read()
+            arq.close()
 
+        with open(result['schedules'][1][1], 'rb') as arq:
+            image_2 = arq.read()
+            arq.close()
 
+        data = {
+            'status': "send_image",
+            'image_1': image_1, 
+            'image_2': image_2, 
+        }
 
+        return data
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return result['status']
     
 
 def instagram_user(received):
