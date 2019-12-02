@@ -134,7 +134,7 @@ def get_last_two_schedules(received):
     """
     conn = Connector()
     result = conn.get_last_two_schedules(received['email'])
-    if result['status'] != None:
+    if result['status'] == "ok":
         image_1 = b''
         image_2 = b''
 
