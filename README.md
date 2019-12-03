@@ -1,6 +1,6 @@
 # InstaScheduler
 
-InstaScheduler é uma aplicação com o objetivo de gerenciar publicações através de agendamento de postagens em uma rede social de fotos chamada [minigram](https://github.com/lucasbezerra26/minigram).
+InstaScheduler é uma aplicação com o objetivo de gerenciar publicações através de agendamento de postagens em uma rede social de fotos chamada [minigram](https://github.com/lucasbezerra26/minigram). Para qualquer dúvida consulte o [relatório](https://github.com/gabrielloliveira/instascheduler/blob/master/documenta%C3%A7%C3%A3o%20Poo.pdf) do projeto.
 
 ## Requisitos
 
