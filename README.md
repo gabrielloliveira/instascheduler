@@ -17,14 +17,18 @@ InstaScheduler é uma aplicação com o objetivo de gerenciar publicações atra
 
 ## Algumas telas da aplicação
 
-Tela de Login
+### Tela de Login
+
 ![Tela de Login](https://github.com/gabrielloliveira/instascheduler/blob/master/screens/static/img/tela-1.png)
 
-Tela da página Home
+### Tela da página Home
+
 ![Tela Home](https://github.com/gabrielloliveira/instascheduler/blob/master/screens/static/img/tela-2.png)
 
-Tela de adicionar instagram
+### Tela de adicionar instagram
+
 ![Tela de adicionar instagram](https://github.com/gabrielloliveira/instascheduler/blob/master/screens/static/img/tela-3.png)
 
-Tela de agendar postagem
+### Tela de agendar postagem
+
 ![Tela de agendar postagem](https://github.com/gabrielloliveira/instascheduler/blob/master/screens/static/img/tela-4.png)
