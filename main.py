@@ -156,14 +156,13 @@ class Main(QMainWindow, Ui_Main):
         self.screen_home.label_4.setPixmap(pngfile2)
 
     def login(self):
-        response = self.screen_login.login()
-
-        if response == "success" or response == "empty":
-            self.home()
-        else:
-            QtWidgets.QMessageBox.about(None, "Login", response)
         try:
-            pass
+            response = self.screen_login.login()
+
+            if response == "success" or response == "empty":
+                self.home()
+            else:
+                QtWidgets.QMessageBox.about(None, "Login", response)
         except:
             QtWidgets.QMessageBox.about(None, "Login", "Não foi possivel estabeler uma conexão com o servidor")
 
