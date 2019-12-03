@@ -125,7 +125,7 @@ class Main(QMainWindow, Ui_Main):
             if date <= datetime.now():
                 self.screen_home.label.setText("Já foi postado")
             else:
-                self.screen_home.label.setText("Será postado às {}:{} do dia {}/{}/{}".format(str(date.hour),str(date.minute),str(date.day),str(date.month),str(date.year)) )
+                self.screen_home.label.setText("Será postado às {}:{} do dia {}/{}/{}".format(date.strftime('%H'),date.strftime('%M'),date.strftime('%d'),date.strftime('%m'),str(date.year)) )
 
             if received['status']['image_2']:
                 with open((f'{BASE_DIR}/screens/static/img/image_2.png'), 'wb') as f:
@@ -140,7 +140,7 @@ class Main(QMainWindow, Ui_Main):
                 if date <= datetime.now():
                     self.screen_home.label_5.setText("Já foi postado")
                 else:
-                    self.screen_home.label_5.setText("Será postado às {}:{} do dia {}/{}/{}".format(str(date.hour),str(date.minute),str(date.day),str(date.month),str(date.year)) )
+                    self.screen_home.label_5.setText("Será postado às {}:{} do dia {}/{}/{}".format(date.strftime('%H'),date.strftime('%M'),date.strftime('%d'),date.strftime('%m'),str(date.year)) )
                 filename2 = (f"{BASE_DIR}/screens/static/img/image_2.png",'image (*.jpg *.png *.icon *.gif)')
             else:
                 filename2 = (f"{BASE_DIR}/screens/static/img/350x250.png",'image (*.jpg *.png *.icon *.gif)')
