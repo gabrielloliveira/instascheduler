@@ -153,6 +153,8 @@ def get_last_two_schedules(received):
             'status': "send_image",
             'image_1': image_1, 
             'image_2': image_2, 
+            'date_1': result['schedules'][0][6],
+            'date_2': result['schedules'][1][6]
         }
 
         return data

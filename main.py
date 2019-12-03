@@ -15,6 +15,7 @@ import socket
 import pickle
 import struct
 from client.connection import Ip
+from datetime import datetime
 
 ip = Ip()
 addr = ip.addr_server
@@ -115,12 +116,31 @@ class Main(QMainWindow, Ui_Main):
             with open((f'{BASE_DIR}/screens/static/img/image_1.png'), 'wb') as f:
                 f.write(received['status']['image_1'])
                 f.close()
-
+            
+            dataImage1 = received['status']['date_1']
+            try:
+                date = datetime.strptime(dataImage1, "%y-%m-%d %H:%M:%S") 
+            except :
+                date = datetime.strptime(dataImage1, "%Y-%m-%d %H:%M:%S") 
+            if date <= datetime.now():
+                self.screen_home.label.setText("Já foi postado")
+            else:
+                self.screen_home.label.setText("Será postado às {}:{} do dia {}/{}/{}".format(str(date.hour),str(date.minute),str(date.day),str(date.month),str(date.year)) )
 
             if received['status']['image_2']:
                 with open((f'{BASE_DIR}/screens/static/img/image_2.png'), 'wb') as f:
                     f.write(received['status']['image_2'])
                     f.close()
+            
+                dataImage2 = received['status']['date_2']
+                try:
+                    date = datetime.strptime(dataImage2, "%y-%m-%d %H:%M:%S") 
+                except :
+                    date = datetime.strptime(dataImage2, "%Y-%m-%d %H:%M:%S") 
+                if date <= datetime.now():
+                    self.screen_home.label_5.setText("Já foi postado")
+                else:
+                    self.screen_home.label_5.setText("Será postado às {}:{} do dia {}/{}/{}".format(str(date.hour),str(date.minute),str(date.day),str(date.month),str(date.year)) )
                 filename2 = (f"{BASE_DIR}/screens/static/img/image_2.png",'image (*.jpg *.png *.icon *.gif)')
             else:
                 filename2 = (f"{BASE_DIR}/screens/static/img/350x250.png",'image (*.jpg *.png *.icon *.gif)')
@@ -136,13 +156,14 @@ class Main(QMainWindow, Ui_Main):
         self.screen_home.label_4.setPixmap(pngfile2)
 
     def login(self):
-        try:
-            response = self.screen_login.login()
+        response = self.screen_login.login()
 
-            if response == "success" or response == "empty":
-                self.home()
-            else:
-                QtWidgets.QMessageBox.about(None, "Login", response)
+        if response == "success" or response == "empty":
+            self.home()
+        else:
+            QtWidgets.QMessageBox.about(None, "Login", response)
+        try:
+            pass
         except:
             QtWidgets.QMessageBox.about(None, "Login", "Não foi possivel estabeler uma conexão com o servidor")
 

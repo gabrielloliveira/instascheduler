@@ -81,10 +81,10 @@ class Ui_Home(object):
 "border-radius: 14px;")
         self.pushButton_4.setObjectName("pushButton_4")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(50, 430, 64, 17))
+        self.label.setGeometry(QtCore.QRect(50, 430, 350, 17))
         self.label.setObjectName("label")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(410, 430, 64, 17))
+        self.label_5.setGeometry(QtCore.QRect(410, 430, 350, 17))
         self.label_5.setObjectName("label_5")
         self.columnView.raise_()
         self.tableWidget.raise_()
@@ -118,8 +118,8 @@ class Ui_Home(object):
         self.label_2.setText(_translate("MainWindow", "InstaScheduler"))
         self.pushButton_3.setText(_translate("MainWindow", "Agendar Post"))
         self.pushButton_4.setText(_translate("MainWindow", "Adicionar Insta"))
-        self.label.setText(_translate("MainWindow", "Status"))
-        self.label_5.setText(_translate("MainWindow", "Status"))
+        # self.label.setText(_translate("MainWindow", "Status"))
+        # self.label_5.setText(_translate("MainWindow", "Status"))
 
 # import icon_rc
 
