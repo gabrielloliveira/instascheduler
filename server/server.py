@@ -137,15 +137,20 @@ def get_last_two_schedules(received):
     if result['status'] == "ok":
         image_1 = b''
         image_2 = b''
+        date_1 = ''
+        date_2 = ''
 
         with open(result['schedules'][0][1], 'rb') as arq:
             image_1 = arq.read()
             arq.close()
 
+        date_1 = result['schedules'][0][6]
         try: 
             with open(result['schedules'][1][1], 'rb') as arq:
                 image_2 = arq.read()
                 arq.close()
+
+            date_2 = result['schedules'][1][6]
         except:
             pass
 
@@ -153,8 +158,8 @@ def get_last_two_schedules(received):
             'status': "send_image",
             'image_1': image_1, 
             'image_2': image_2, 
-            'date_1': result['schedules'][0][6],
-            'date_2': result['schedules'][1][6]
+            'date_1': date_1,
+            'date_2': date_2
         }
 
         return data
